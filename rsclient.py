@@ -20,7 +20,7 @@ def receive_lines(sock):
             # data = sock.recv(1024) # Read up to 1024 bytes
             if not data:  # If empty, the connection is closed
                 break
-
+            print("----kk----------------------")
             print(f"{data} \n")
             # dataline += data  # Append received data to buffer
 
