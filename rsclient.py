@@ -6,7 +6,7 @@ SERVER_PORT = 1952       # Change to the actual port
 
 # Number to send
 number = "macbook meghana 1"  # Change this to any number
-number2 = "macbook meghana 2"
+
 #
 def receive_lines(sock):
     dataline = ""  # Buffer for incoming data
@@ -43,15 +43,13 @@ try:
 
     # Send the number (encode to bytes)
     client_socket.sendall(number.encode('ascii'))
-    
 
     # Receive response
     # response = client_socket.recv(1024).decode('ascii')
     # response = client_socket.recv(1024)
     # print(f"Server response: {response}")
     receive_lines(client_socket)
-    client_socket.sendall(number2.encode('ascii'))
-    receive_lines(client_socket)
+
 except Exception as e:
     print(f"Error: {e}")
 
