@@ -2,7 +2,7 @@ import socket
 import time  # Added for optional delay between messages
 
 # Server details
-SERVER_IP = "9.56.214.105"
+SERVER_IP = "9.60.56.68"
 SERVER_PORT = 1952
 
 # Messages to send
