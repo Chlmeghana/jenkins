@@ -1,7 +1,7 @@
 import socket
 
 # Server details
-SERVER_IP = "9.56.214.105"  # Change to the actual server IP
+SERVER_IP = "9.60.56.68"  # Change to the actual server IP
 SERVER_PORT = 1952       # Change to the actual port
 
 # Number to send
