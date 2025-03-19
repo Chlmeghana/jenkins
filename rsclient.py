@@ -5,8 +5,8 @@ SERVER_IP = "9.60.56.68"  # Change to the actual server IP
 SERVER_PORT = 1952       # Change to the actual port
 
 # Number to send
-number = "macbook meghana 2"  # Change this to any number
-
+number = "macbook meghana 1"  # Change this to any number
+number2 = "macbook meghana 2"
 #
 def receive_lines(sock):
     dataline = ""  # Buffer for incoming data
@@ -43,6 +43,7 @@ try:
 
     # Send the number (encode to bytes)
     client_socket.sendall(number.encode('ascii'))
+    client_socket.sendall(number2.encode('ascii'))
 
     # Receive response
     # response = client_socket.recv(1024).decode('ascii')
