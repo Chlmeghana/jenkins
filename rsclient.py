@@ -1,24 +1,33 @@
 import socket
-import time  # Added for optional delay between messages
 
 # Server details
-SERVER_IP = "9.60.56.68"
-SERVER_PORT = 1952
+SERVER_IP = "9.60.56.68"  # Change to the actual server IP
+SERVER_PORT = 1952       # Change to the actual port
 
-# Messages to send
-messages = ["macbook meghana 1", "macbook meghana 2"]
+# Number to send
+number = "macbook meghana 1"  # Change this to any number
 
+#
 def receive_lines(sock):
-    dataline = ""  
-    num = 0        
+    dataline = ""  # Buffer for incoming data
+    num = 0        # Line counter
 
-    while True:  
+    while True:  # Infinite loop to receive data
         try:
+            # Read data from the socket
+            # data = sock.recv(1024).decode('ascii', errors='replace')  # Read up to 1024 bytes
             data = sock.recv(1024).decode('latin-1')  # Read up to 1024 bytes
-            if not data:  
+            # data = sock.recv(1024) # Read up to 1024 bytes
+            if not data:  # If empty, the connection is closed
                 break
 
             print(f"{data} \n")
+            # dataline += data  # Append received data to buffer
+
+            # while '\x15' in dataline:  # Process complete lines (delimiter = '15'x in REXX)
+            #   nextline, dataline = dataline.split('\x15', 1)  # Extract first complete line
+            #   num += 1
+            #   print(f"{num:5}: {nextline}")  # Print line number and data
 
         except Exception as e:
             print(f"Error: {e}")
@@ -32,13 +41,13 @@ try:
     client_socket.connect((SERVER_IP, SERVER_PORT))
     print(f"Connected to {SERVER_IP}:{SERVER_PORT}")
 
-    # Send multiple messages
-    for message in messages:
-        client_socket.sendall(message.encode('ascii'))  # Send each message
-        print(f"Sent: {message}")
-        time.sleep(1)  # Optional delay for better clarity in server output
+    # Send the number (encode to bytes)
+    client_socket.sendall(number.encode('ascii'))
 
     # Receive response
+    # response = client_socket.recv(1024).decode('ascii')
+    # response = client_socket.recv(1024)
+    # print(f"Server response: {response}")
     receive_lines(client_socket)
 
 except Exception as e:
