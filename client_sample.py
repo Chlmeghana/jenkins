@@ -1,9 +1,11 @@
 import sys
 
-if len(sys.argv) != 2 or not sys.argv[1].strip():
-    print("Error: No value received from Jenkins.")
-    sys.exit(1)
+lpars_selection = sys.argv[1]
+available_hatt_files = sys.argv[2]
+output_format = sys.argv[3]
 
-selected_value = sys.argv[1]
-print(f"Selected Value: {selected_value}")
+print(f"Selected LPAR: {lpars_selection}")
+print(f"Selected HATT File: {available_hatt_files}")
+print(f"Output Format: {output_format}")
+
 
