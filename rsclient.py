@@ -3,9 +3,15 @@ import socket
 # Server details
 SERVER_IP = "9.60.56.68"  # Change to the actual server IP
 SERVER_PORT = 1952       # Change to the actual port
+import sys
 
+lpars_selection = sys.argv[1]
+available_hatt_files = sys.argv[2]
+name = sys.argv[3]
+password = sys.argv[4]
 # Number to send
-number = "macbook meghana 1 sowmiyap P1CH@ND1 jenkins6"  # Change this to any number
+number = "macbook meghana 1" name password available_hatt_files 
+# Change this to any number
 
 #
 def receive_lines(sock):
