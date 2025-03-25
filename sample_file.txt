@@ -1,0 +1,4 @@
+Hi all this is meghana writing from sample_file.txt from github
+
+
+-----------------------------want this to be populated as an artifact when i build the freestyle job GitHub_File_Builder...........------------------------
