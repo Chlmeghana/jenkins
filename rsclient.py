@@ -10,7 +10,7 @@ available_hatt_files = sys.argv[2]
 name = sys.argv[3]
 password = sys.argv[4]
 # Number to send
-number = number = f"macbook meghana 1 {name} {password} {available_hatt_files}"
+number = f"macbook meghana 1 {name} {password} {available_hatt_files}"
 
 # Change this to any number
 
