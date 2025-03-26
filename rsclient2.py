@@ -7,10 +7,10 @@ import sys
 
 lpars_selection = sys.argv[1]
 available_hatt_files = sys.argv[2]
-name = sys.argv[3]
-password = sys.argv[4]
+name1 = sys.argv[3]
+name2 = sys.argv[4]
 # Number to send
-number = f"macbook meghana 2 {name} {password} {available_hatt_files}"  # Change this to any number
+number = f"macbook {name1} 2 {name2} {password} {available_hatt_files}"  # Change this to any number
 
 #
 def receive_lines(sock):
