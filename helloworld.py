@@ -1,3 +1,3 @@
-# Example Python script
-names = ["Alice", "Bob", "Charlie"]
-print("\n".join(names))  # One name per line
+import json
+names = ["Alice", "Bob", "Charlie"]  # Or your actual list from somewhere
+print(json.dumps(names))
