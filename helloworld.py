@@ -1,3 +1,4 @@
-a=7
-b=1
-print((a+b)*["Hello World"])
+# your_script.py
+names = ["Alice", "Bob", "Charlie"]
+for name in names:
+    print(name)
