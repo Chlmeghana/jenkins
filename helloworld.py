@@ -1,3 +1,1 @@
-import json
-names = ["Alice", "Bob", "Charlie"]  # Or your actual list from somewhere
-print(json.dumps(names))
+print("Alice\nBob\nCharlie")  # Simple newline-separated names
