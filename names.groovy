@@ -1,0 +1,1 @@
+return ["ALICE","BOB","CHAR"]
