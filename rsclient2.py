@@ -11,7 +11,7 @@ name1 = sys.argv[3]
 name2 = sys.argv[4]
 password = "CF7TEST5"
 # Number to send
-number = f"macbook {name1} 2 {name2} {password} {available_hatt_files}"  # Change this to any number
+number = f"jenkins {name1} 2 {name2} {password} {available_hatt_files}"  # Change this to any number
 
 #
 def receive_lines(sock):
