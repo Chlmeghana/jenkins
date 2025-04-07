@@ -335,7 +335,6 @@ class console(object):
                 time.sleep(1)
                 if self.findStatus(status='MORE...'):
                     self.em.send_pa1()
-                    self.em.send_pa8()
                     self.em.send_enter()
                     continue
                 if self.findStatus(status='HOLDING'):
