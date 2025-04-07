@@ -334,6 +334,7 @@ class console(object):
                     logging.debug(s)
                 time.sleep(1)
                 if self.findStatus(status='MORE...'):
+                    self.em.send_pa1()
                     self.em.send_pa8()
                     self.em.send_enter()
                     continue
