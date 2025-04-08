@@ -414,7 +414,7 @@ The cms_ext_api provides both a library and a command line interface to it, to a
             format='%(levelname)s:%(message)s',
             level=logging.DEBUG)
 
-    commands = ["chugd INTESTID CF7TEST5 (sample2.hatt","filel * hatt *"]
+    commands = ["chugd INTESTID CF7TEST5 (sample2.hatt","filel sample2 html A"]
     c = console(args_dict, u, p)
     r = c.logon()
     if r != ALL_FINE:
