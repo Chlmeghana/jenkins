@@ -1,3 +1,4 @@
 names = ["Alice", "Bob", "Charlie"]
-print(names)
-
+with open("/tmp/names.txt", "w") as f:
+    for name in names:
+        f.write(name + "\n")
