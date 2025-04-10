@@ -1,28 +1,26 @@
 def fetchFtpFiles() {
     def host = "gdlfcft.endicott.ibm.com"
-    def user = "meghana"
-    def password = "B@NGAL0R" // For security, consider fetching this from environment variables.
-
+    def user = System.getenv("FTP_USER") ?: "meghana"
+    def password = System.getenv("FTP_PASS") ?: "B@NGAL0R"
     try {
         def command = "lftp -u ${user},${password} ${host} -e 'ls *.HATT; bye'"
         def process = ['bash', '-c', command].execute()
         def output = new StringBuffer()
         def error = new StringBuffer()
         process.waitForProcessOutput(output, error)
-
-        if (error) {
+        if (error.toString().trim()) {
             println "Error: $error"
-            return []
+            return ""
         } else {
-            def fileList = (output.toString() =~ /\b[A-Z0-9]+\.HATT\b/)*.toString()
-            return fileList
+            def fileList = (output.toString() =~ /[A-Z0-9]+\.HATT/).findAll()
+            def fileListStr = fileList.join(",")
+            println "FILE_LIST=${fileListStr}" // For Jenkins to pick it up
+            return fileListStr
         }
-
     } catch (Exception e) {
-        println "Error: ${e.message}"
-        return []
+        println "Exception: ${e.message}"
+        return ""
     }
 }
-
 def result = fetchFtpFiles()
-println "$result"
+println "Fetched files: $result"
