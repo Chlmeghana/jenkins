@@ -1,3 +1,3 @@
 names = ["Alice", "Bob", "Charlie"]
-return names
+print(names)
 
