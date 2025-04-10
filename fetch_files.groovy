@@ -23,4 +23,5 @@ def fetchFtpFiles() {
     }
 }
 def result = fetchFtpFiles()
+println "HI hello"
 println "Fetched files: $result"
