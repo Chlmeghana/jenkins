@@ -414,7 +414,7 @@ The cms_ext_api provides both a library and a command line interface to it, to a
             format='%(levelname)s:%(message)s',
             level=logging.DEBUG)
     lpars_selection = sys.argv[1]
-available_hatt_files = sys.argv[2]
+    available_hatt_files = sys.argv[2]
     print(lpars_selection,available_hatt_files)
     commands = ["chugd INTESTID CF7TEST5 (sample2.hatt"]
     c = console(args_dict, u, p)
