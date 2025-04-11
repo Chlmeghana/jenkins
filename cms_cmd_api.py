@@ -418,7 +418,7 @@ The cms_ext_api provides both a library and a command line interface to it, to a
     lpars_selection = sys.argv[6]
     available_hatt_files = sys.argv[7]
     target = sys.argv[8]
-    commands = ["chugd INTESTID CF7TEST5 (sample2.hatt"]
+    commands = [f"chugd {target} CF7TEST5 ({available_hatt_files}"]
     c = console(args_dict, u, p)
     r = c.logon()
     if r != ALL_FINE:
