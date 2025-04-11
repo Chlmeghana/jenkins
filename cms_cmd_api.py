@@ -369,6 +369,7 @@ The cms_ext_api provides both a library and a command line interface to it, to a
     parser.add_argument('abc', help='Provide abc as positional arg')
     parser.add_argument('abc', help='Provide abc as positional arg')
     parser.add_argument('abc', help='Provide abc as positional arg')
+    parser.add_argument('abc', help='Provide abc as positional arg')
     parser.add_argument('--host', action='store', required=True)
     parser.add_argument('-u', '--username', action='store',
                         default=None, help='Give the username and then \
@@ -418,6 +419,9 @@ The cms_ext_api provides both a library and a command line interface to it, to a
     lpars_selection = sys.argv[6]
     available_hatt_files = sys.argv[7]
     target = sys.argv[8]
+    file_format = sys.argv[8]
+    print( "----------file--------")
+    print(file_format)
     commands = [f"chugd {target} CF7TEST5 ({available_hatt_files}"]
     c = console(args_dict, u, p)
     r = c.logon()
