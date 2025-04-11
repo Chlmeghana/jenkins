@@ -1,11 +1,12 @@
 import subprocess
 import re
+
+# Configuration
 host = "gdlfcft.endicott.ibm.com"
 user = "meghana"
 password = "B@NGAL0R"
-filename = "CFTDEMOT.HATT"  # Change this to whichever file you want to read
-print("---------filename--------------")
-print(filename)
+filename = "SAMPLE3.HTML"  # Change this to whichever file you want to read
+
 def get_html_file(host, user, password, filename):
     command = f'lftp -u {user},{password} {host} -e "cat {filename}; bye"'
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
