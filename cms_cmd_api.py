@@ -366,7 +366,7 @@ if __name__ == "__main__":
         description=textwrap.dedent('''\
 The cms_ext_api provides both a library and a command line interface to it, to allow connection to a 3270 terminal and through it to a z/VM, and then to execute a number of .
         '''))
-    parser.add_argument('userid2', help='Provide userid2 as positional arg')
+    parser.add_argument('user', help='Provide user as positional arg')
     parser.add_argument('--host', action='store', required=True)
     parser.add_argument('-u', '--username', action='store',
                         default=None, help='Give the username and then \
