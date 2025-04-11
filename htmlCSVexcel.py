@@ -90,7 +90,7 @@ def write_summary_to_html(summary, filename="test_summary.html"):
     </html>
     """
     with open(filename, "w") as f:
-        f.write(html)
+        f.write(summary)
 
 # === Main Script Logic ===
 html_content = get_html_file(host, user, password, filename)
