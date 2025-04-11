@@ -1,16 +1,26 @@
 import subprocess
 import re
 import sys
+import codecs
+
+# FTP Configuration
 host = "gdlfcft.endicott.ibm.com"
 user = "meghana"
 password = "B@NGAL0R"
-filename = sys.argv[1]  # Change this to whichever file you want to read
+
+# Filename from command-line argument
+filename = sys.argv[1]
 
 def get_html_file(host, user, password, filename):
     command = f'lftp -u {user},{password} {host} -e "cat {filename}; bye"'
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     output, error = process.communicate()
-    return output.decode("latin1")
+
+    # Try decoding as Latin-1 first, then fallback to EBCDIC cp037 if needed
+    try:
+        return output.decode("latin1")
+    except UnicodeDecodeError:
+        return codecs.decode(output, "cp037")
 
 def parse_html(html):
     summary = {
@@ -33,15 +43,13 @@ def parse_html(html):
     return summary
 
 def remove_unwanted_pre_blocks(html):
-    # Remove <pre> blocks containing the specific "Command not valid before LOGON" text
+    # Remove all <pre> blocks that contain the specific "Command not valid before LOGON" string
     pattern = r'<pre>.*?HCPCFC015E Command not valid before LOGON: ID.*?</pre>'
     return re.sub(pattern, '', html, flags=re.DOTALL)
 
-# Main logic
+# Main execution
 html_content = get_html_file(host, user, password, filename)
 summary = parse_html(html_content)
-
-# Clean up HTML
 cleaned_html = remove_unwanted_pre_blocks(html_content)
 
 # Output
