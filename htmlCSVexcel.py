@@ -36,9 +36,9 @@ def parse_html(html):
     summary["Errors"] = len(errors)
     return summary
 
-def remove_unwanted_pre_blocks(html):
-    pattern = r'<pre>.*?HCPCFC015E Command not valid before LOGON: ID.*?</pre>'
-    return re.sub(pattern, '', html, flags=re.DOTALL)
+def remove_all_pre_blocks(html):
+    # Remove all <pre>...</pre> blocks
+    return re.sub(r'<pre>.*?</pre>', '', html, flags=re.DOTALL)
 
 def write_summary_to_excel(summary, filename="test_summary.xlsx"):
     wb = Workbook()
@@ -57,19 +57,18 @@ def write_summary_to_csv(summary, filename="test_summary.csv"):
             writer.writerow([key, value])
 
 def write_summary_to_html(html_content, filename="test_summary.html"):
-    # Save the (cleaned) HTML content directly into the file
     with open(filename, "w", encoding="latin1") as f:
         f.write(html_content)
 
 # === Main Script Logic ===
 html_content = get_html_file(host, user, password, filename)
-cleaned_html = remove_unwanted_pre_blocks(html_content)
+cleaned_html = remove_all_pre_blocks(html_content)
 summary = parse_html(html_content)
 
 # Generate all report formats
 write_summary_to_excel(summary)
 write_summary_to_csv(summary)
-write_summary_to_html(cleaned_html)  # Save cleaned HTML as final HTML report
+write_summary_to_html(cleaned_html)
 
 # Optional: Console output
 print("Test Summary from HTML:", summary)
