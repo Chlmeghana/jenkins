@@ -422,7 +422,7 @@ The cms_ext_api provides both a library and a command line interface to it, to a
     file_format = sys.argv[9]
     print( "----------file--------")
     print(file_format)
-    commands = [f"chugd {target} CF7TEST5 ({available_hatt_files}"]
+    commands = [f"chugd {target} {sys.argv[10]} ({available_hatt_files}"]
     c = console(args_dict, u, p)
     r = c.logon()
     if r != ALL_FINE:
