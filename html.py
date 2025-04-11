@@ -6,7 +6,8 @@ host = "gdlfcft.endicott.ibm.com"
 user = "meghana"
 password = "B@NGAL0R"
 filename = sys.argv[1]  # Change this to whichever file you want to read
-
+print("---------filename--------------")
+print(filename)
 def get_html_file(host, user, password, filename):
     command = f'lftp -u {user},{password} {host} -e "cat {filename}; bye"'
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
