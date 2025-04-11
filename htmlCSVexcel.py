@@ -9,7 +9,7 @@ host = "gdlfcft.endicott.ibm.com"
 user = sys.argv[1]
 password = sys.argv[2]
 filename = sys.argv[3]  # Trim .html or .HTML if needed
-filename = filename.split('.')[0]
+filename = filename.split('.')[0]+".html"
 
 def get_html_file(host, user, password, filename):
     command = f'lftp -u {user},{password} {host} -e "cat {filename}; bye"'
