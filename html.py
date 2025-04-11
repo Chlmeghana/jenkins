@@ -1,7 +1,5 @@
 import subprocess
 import re
-import sys
-# Configuration
 host = "gdlfcft.endicott.ibm.com"
 user = "meghana"
 password = "B@NGAL0R"
