@@ -56,50 +56,20 @@ def write_summary_to_csv(summary, filename="test_summary.csv"):
         for key, value in summary.items():
             writer.writerow([key, value])
 
-def write_summary_to_html(summary, filename="test_summary.html"):
-    html = f"""
-    <html>
-    <head>
-        <title>Test Summary</title>
-        <style>
-            body {{
-                font-family: Arial, sans-serif;
-            }}
-            table {{
-                border-collapse: collapse;
-                width: 50%;
-                margin-top: 20px;
-            }}
-            th, td {{
-                border: 1px solid #ccc;
-                padding: 8px;
-                text-align: left;
-            }}
-            th {{
-                background-color: #f2f2f2;
-            }}
-        </style>
-    </head>
-    <body>
-        <h2>Test Summary Report</h2>
-        <table>
-            <tr><th>Metric</th><th>Count</th></tr>
-            {''.join(f'<tr><td>{key}</td><td>{value}</td></tr>' for key, value in summary.items())}
-        </table>
-    </body>
-    </html>
-    """
-    with open(filename, "w") as f:
-        f.write(summary)
+def write_summary_to_html(html_content, filename="test_summary.html"):
+    # Save the (cleaned) HTML content directly into the file
+    with open(filename, "w", encoding="latin1") as f:
+        f.write(html_content)
 
 # === Main Script Logic ===
 html_content = get_html_file(host, user, password, filename)
 cleaned_html = remove_unwanted_pre_blocks(html_content)
 summary = parse_html(html_content)
+
 # Generate all report formats
 write_summary_to_excel(summary)
 write_summary_to_csv(summary)
-write_summary_to_html(cleaned_html)
+write_summary_to_html(cleaned_html)  # Save cleaned HTML as final HTML report
 
 # Optional: Console output
 print("Test Summary from HTML:", summary)
