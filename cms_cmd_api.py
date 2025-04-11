@@ -370,6 +370,7 @@ The cms_ext_api provides both a library and a command line interface to it, to a
     parser.add_argument('abc', help='Provide abc as positional arg')
     parser.add_argument('abc', help='Provide abc as positional arg')
     parser.add_argument('abc', help='Provide abc as positional arg')
+    parser.add_argument('abc', help='Provide abc as positional arg')
     parser.add_argument('--host', action='store', required=True)
     parser.add_argument('-u', '--username', action='store',
                         default=None, help='Give the username and then \
