@@ -5,7 +5,7 @@ import sys
 host = "gdlfcft.endicott.ibm.com"
 user = "meghana"
 password = "B@NGAL0R"
-filename = sys.argv[1]  # Change this to whichever file you want to read
+filename = sys.argv[1][:-5]+".html"  # Change this to whichever file you want to read
 
 def get_html_file(host, user, password, filename):
     command = f'lftp -u {user},{password} {host} -e "cat {filename}; bye"'
