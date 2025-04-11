@@ -3,12 +3,10 @@ import re
 import sys
 import codecs
 
-# FTP Configuration
+# FTP details
 host = "gdlfcft.endicott.ibm.com"
 user = "meghana"
 password = "B@NGAL0R"
-
-# Filename from command-line argument
 filename = sys.argv[1]
 
 def get_html_file(host, user, password, filename):
@@ -16,11 +14,18 @@ def get_html_file(host, user, password, filename):
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     output, error = process.communicate()
 
-    # Try decoding as Latin-1 first, then fallback to EBCDIC cp037 if needed
+    # Try decoding: latin1 first, fallback to cp037
     try:
-        return output.decode("latin1")
+        html = output.decode("latin1")
+        if "<html" not in html and "<HTML" not in html:
+            raise UnicodeDecodeError("latin1", output, 0, 1, "Not HTML-like content")
+        return html
     except UnicodeDecodeError:
-        return codecs.decode(output, "cp037")
+        try:
+            return codecs.decode(output, "cp037")
+        except Exception as e:
+            print(f"Decoding failed: {e}")
+            return output.decode('utf-8', errors='replace')  # as a last resort
 
 def parse_html(html):
     summary = {
@@ -43,11 +48,11 @@ def parse_html(html):
     return summary
 
 def remove_unwanted_pre_blocks(html):
-    # Remove all <pre> blocks that contain the specific "Command not valid before LOGON" string
+    # Remove all <pre> blocks that contain "Command not valid before LOGON"
     pattern = r'<pre>.*?HCPCFC015E Command not valid before LOGON: ID.*?</pre>'
     return re.sub(pattern, '', html, flags=re.DOTALL)
 
-# Main execution
+# Main logic
 html_content = get_html_file(host, user, password, filename)
 summary = parse_html(html_content)
 cleaned_html = remove_unwanted_pre_blocks(html_content)
