@@ -94,13 +94,12 @@ def write_summary_to_html(summary, filename="test_summary.html"):
 
 # === Main Script Logic ===
 html_content = get_html_file(host, user, password, filename)
-summary = parse_html(html_content)
 cleaned_html = remove_unwanted_pre_blocks(html_content)
-
+summary = parse_html(html_content)
 # Generate all report formats
 write_summary_to_excel(summary)
 write_summary_to_csv(summary)
-write_summary_to_html(summary)
+write_summary_to_html(cleaned_html)
 
 # Optional: Console output
 print("Test Summary from HTML:", summary)
