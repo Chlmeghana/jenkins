@@ -421,9 +421,10 @@ The cms_ext_api provides both a library and a command line interface to it, to a
     available_hatt_files = sys.argv[7]
     target = sys.argv[8]
     file_format = sys.argv[9]
+    testpassword = sys.argv[10]
     print( "----------file--------")
     print(file_format)
-    commands = [f"chugd {target} {sys.argv[10]} ({available_hatt_files}"]
+    commands = [f"chugd {target} {testpassword} ({available_hatt_files}"]
     c = console(args_dict, u, p)
     r = c.logon()
     if r != ALL_FINE:
