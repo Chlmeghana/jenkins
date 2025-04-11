@@ -5,7 +5,7 @@ import sys
 host = "gdlfcft.endicott.ibm.com"
 user = "meghana"
 password = "B@NGAL0R"
-filename = sys.argv[1]  # Change this to whichever file you want to read
+filename = "CFTDEMOT.HATT"  # Change this to whichever file you want to read
 print("---------filename--------------")
 print(filename)
 def get_html_file(host, user, password, filename):
