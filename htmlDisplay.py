@@ -10,7 +10,7 @@ def get_html_file(host, user, password, filename):
     command = f'lftp -u {user},{password} {host} -e "cat {filename}; bye"'
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     output, error = process.communicate()
-    return output.decode()
+    return output.decode("latin1")
 
 def parse_html(html):
     summary = {
