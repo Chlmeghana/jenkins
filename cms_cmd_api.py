@@ -316,15 +316,12 @@ class console(object):
 
     @timeout(seconds=60)  # will have to be replaced by other kind of timeout
     def execute_command(self, command=None):
-
         self.em.send_clear()
         if command is None or command == [] or command == '':
-            raise Exception(
-                'No commands have been passed in the execute_command method.')
+            raise Exception('No commands have been passed in the execute_command method.')
         self.em.send_string(command)
         self.em.send_enter()
 
-        # check that the results are all printed before emoving on
         found = False
         while not found:
             time.sleep(1)
@@ -344,11 +341,16 @@ class console(object):
                 if self.findStatus(status='RUNNING'):
                     self.em.send_enter()
                     continue
-                found = self.findString(string='Ready', status='VM READ')
+                # THIS IS THE KEY CHANGE BELOW
+                found = (
+                    self.findString(string='Ready', status='VM READ') or
+                    self.findString(string='CP')  # <-- recognize CP
+                )
             except TimeoutSignal:
                 if found:
                     break
         return
+
 
     def logoff(self):
         self.em.send_string('logoff')
