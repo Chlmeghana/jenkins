@@ -426,7 +426,7 @@ The cms_ext_api provides both a library and a command line interface to it, to a
     testpassword = sys.argv[10]
     print( "----------file--------")
     print(file_format)
-    commands = [f"chugd {target} {testpassword} ({available_hatt_files}"]
+    commands = ["filel"]
     c = console(args_dict, u, p)
     r = c.logon()
     if r != ALL_FINE:
