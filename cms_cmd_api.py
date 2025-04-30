@@ -317,38 +317,39 @@ class console(object):
     @timeout(seconds=60)  # will have to be replaced by other kind of timeout
     def execute_command(self, command=None):
         self.em.send_clear()
-
-        if not command:
+        if command is None or command == [] or command == '':
             raise Exception('No commands have been passed in the execute_command method.')
-
         self.em.send_string(command)
         self.em.send_enter()
 
-        while True:
+        found = False
+        while not found:
             time.sleep(1)
-
-            screen_lines = self.em.screen_parser(quiet=self.args['quiet'])
-            if self.args['logfile'] is not None:
-                logging.debug(screen_lines)
-
-            screen_text = "\n".join(screen_lines).lower()
-
-            # Stop if "running" is found anywhere on the screen
-            if "running" in screen_text:
-                break
-
-            # If screen says MORE... or HOLDING, go to next page
-            if "more..." in screen_text or "holding" in screen_text:
-                self.em.send_pa1()
-                self.em.send_enter()
-                continue
-
-            # Optional: handle Ready or CP or VM READ as potential end
-            if "ready;" in screen_text or "cp" in screen_text or "vm read" in screen_text:
-                break
-
+            try:
+                s = self.em.screen_parser(quiet=self.args['quiet'])
+                if self.args['logfile'] is not None:
+                    logging.debug(s)
+                time.sleep(1)
+                if self.findStatus(status='MORE...'):
+                    self.em.send_pa1()
+                    self.em.send_enter()
+                    continue
+                if self.findStatus(status='HOLDING'):
+                    self.em.send_pa1()
+                    self.em.send_enter()
+                    continue
+                if self.findStatus(status='RUNNING'):
+                    self.em.send_enter()
+                    continue
+                # THIS IS THE KEY CHANGE BELOW
+                found = (
+                    self.findString(string='Ready', status='VM READ') or
+                    self.findString(string='CP')  # <-- recognize CP
+                )
+            except TimeoutSignal:
+                if found:
+                    break
         return
-
 
 
     def logoff(self):
