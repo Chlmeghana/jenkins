@@ -115,6 +115,8 @@ class expandedEmulator(Emulator):
 
     def send_pf10(self):
         self.exec_command(b'PF(10)')
+    def send_pf8(self):
+        self.exec_command(b'PF(8)')
 
     def send_pa1(self):
         self.exec_command(b'PA(1)')
@@ -336,6 +338,10 @@ class console(object):
                 if self.args['logfile'] is not None:
                     logging.debug(s)
                 time.sleep(1)
+                if self.findString(string='8= Forward'):
+                    self.em.send_pf8()
+                    self.em.send_enter()
+                    continue
                 if self.findStatus(status='MORE...'):
                     self.em.send_pa1()
                     self.em.send_enter()
