@@ -121,6 +121,8 @@ class expandedEmulator(Emulator):
 
     def send_clear(self):
         self.exec_command(b'CLEAR')
+    def send_enter(self):
+        self.exec_command(b'ENTER')
 
     def save_screen_string(self):
         s = self.exec_command(b'PrintText(string)')
