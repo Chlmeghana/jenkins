@@ -1,4 +1,4 @@
-this is my script
+
 #!/usr/bin/env python3
 
 import os
