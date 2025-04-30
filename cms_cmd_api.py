@@ -347,7 +347,7 @@ class console(object):
                 if self.findStatus(status='RUNNING'):
                     self.em.send_enter()
                     continue
-                found = self.findString(string='Ready', status='VM READ') or self.findString(string='CP') 
+                found = ( self.findString(string='Ready', status='VM READ') or self.findString(string='CP') )
             except TimeoutSignal:
                 if found:
                     break
