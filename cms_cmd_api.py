@@ -324,7 +324,7 @@ class console(object):
                 'No commands have been passed in the execute_command method.')
         self.em.send_string(command)
         self.em.send_enter()
-
+        self.em.send_enter()
         # check that the results are all printed before emoving on
         found = False
         while not found:
