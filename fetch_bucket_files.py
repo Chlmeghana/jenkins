@@ -1,47 +1,80 @@
 import subprocess
 import re
-import os
+import sys
+import csv
+from openpyxl import Workbook
 
-def fetch_ftp_files():
-    host = "gdlfcft.endicott.ibm.com"
-    user = "meghana"
-    password = os.getenv("FTP_PASSWORD", "B@NGAL0R")
+# Configuration
+host = "gdlfcft.endicott.ibm.com"
+user = sys.argv[1]
+password = sys.argv[2]
+filename = sys.argv[3] if len(sys.argv) > 3 else "PXBUCKET.H$$$"  # Allow optional file input
+
+def get_html_file(host, user, password, filename):
+    command = f'lftp -u {user},{password} {host} -e "cat {filename}; bye"'
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    output, error = process.communicate()
 
     try:
-        # Get file listing
-        command = f"lftp -u {user},{password} {host} -e 'ls; bye'"
-        result = subprocess.run(command, shell=True, capture_output=True)
+        return output.decode("cp500")  # Attempt EBCDIC decode
+    except UnicodeDecodeError:
+        return output.decode("latin1")  # Fallback
 
-        # Get PXBUCKET.H$$$ content
-        command2 = f"lftp -u {user},{password} {host} -e 'cat SR2BUCK4.H$$$ ; bye'"
-        result2 = subprocess.run(command2, shell=True, capture_output=True)
+def parse_html(html):
+    summary = {
+        "Passed": 0,
+        "Failed": 0,
+        "Warnings": 0,
+        "Errors": 0
+    }
+    passed = re.search(r'Tests Passed:\s*(\d+)', html)
+    failed = re.search(r'Tests Failed:\s*(\d+)', html)
+    warnings = re.findall(r'WARNING:', html)
+    errors = re.findall(r'ERROR:', html)
 
-        # Decode using cp500 (EBCDIC)
-        ls_output = result.stdout.decode('latin1', errors='replace')
-        try:
-            cat_output = result2.stdout.decode('cp500', errors='replace')
-        except UnicodeDecodeError:
-            cat_output = result2.stdout.decode('latin1', errors='replace')  # fallback
+    if passed:
+        summary["Passed"] = int(passed.group(1))
+    if failed:
+        summary["Failed"] = int(failed.group(1))
+    summary["Warnings"] = len(warnings)
+    summary["Errors"] = len(errors)
+    return summary
 
-        if result.returncode != 0:
-            print("FTP connection failed:")
-            print(result.stderr.decode('latin1', errors='replace'))
-            return
+def remove_all_pre_blocks(html):
+    return re.sub(r'<pre>.*?</pre>', '', html, flags=re.DOTALL)
 
-        # Extract file names
-        file_list = re.findall(r'\b[A-Z0-9]+(?:\$\$\$)?\.(?:HATT|HTML|F1|G1)\b', ls_output)
+def write_summary_to_excel(summary, filename="test_summary.xlsx"):
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Test Summary"
+    ws.append(["Metric", "Count"])
+    for key, value in summary.items():
+        ws.append([key, value])
+    wb.save(filename)
 
-        # Display file list
-       # print("Files found:")
-        #for file in sorted(set(file_list)):
-         #   print(file)
+def write_summary_to_csv(summary, filename="test_summary.csv"):
+    with open(filename, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Metric", "Count"])
+        for key, value in summary.items():
+            writer.writerow([key, value])
 
-        # Display PXBUCKET.H$$$ content
-        print("\n--- Content of PXBUCKET.H$$$ ---")
-        print(cat_output.strip())
+def write_summary_to_html(html_content, filename="test_summary.html"):
+    with open(filename, "w", encoding="latin1") as f:
+        f.write(html_content)
 
-    except Exception as e:
-        print(f"Error: {e}")
+# === Main Script Logic ===
+html_content = get_html_file(host, user, password, filename)
+cleaned_html = remove_all_pre_blocks(html_content)
+summary = parse_html(html_content)
 
-if __name__ == "__main__":
-    fetch_ftp_files()
+# Generate reports
+write_summary_to_excel(summary)
+write_summary_to_csv(summary)
+write_summary_to_html(cleaned_html)
+
+# Console output
+print("Test Summary from HTML:", summary)
+print("\n--- HTML Content Start ---\n")
+print(cleaned_html.strip())
+print("\n--- HTML Content End ---\n")
