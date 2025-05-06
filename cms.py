@@ -334,6 +334,9 @@ class console(object):
                 if self.args['logfile'] is not None:
                     logging.debug(s)
                 time.sleep(1)
+                found = self.findString(string='Ready')
+                found = self.findString(string='CMS')
+                if found: return
                 if self.findStatus(status='MORE...'):
                     self.em.send_pa1()
                     self.em.send_enter()
