@@ -338,6 +338,10 @@ class console(object):
                     self.em.send_pa1()
                     self.em.send_enter()
                     continue
+                if self.findString(string='CP'):
+                    self.em.send_pa1()
+                    self.em.send_enter()
+                    continue
                 if self.findStatus(status='HOLDING'):
                     self.em.send_pa1()
                     self.em.send_enter()
