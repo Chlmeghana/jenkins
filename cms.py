@@ -350,6 +350,8 @@ class console(object):
                     self.em.send_enter()
                     continue
                 found = self.findString(string='Ready')
+                found = self.findString(string='CMS')
+                if found: return
             except TimeoutSignal:
                 if found:
                     break
