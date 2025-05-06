@@ -8,7 +8,7 @@ from openpyxl import Workbook
 host = "gdlfcft.endicott.ibm.com"
 user = sys.argv[1]
 password = sys.argv[2]
-filename = sys.argv[3]
+filename = "PXBUCKET.H$$$"
 
 def get_html_file(host, user, password, filename):
     command = f'lftp -u {user},{password} {host} -e "cat {filename}; bye"'
