@@ -328,7 +328,6 @@ class console(object):
                 'No commands have been passed in the execute_command method.')
         self.em.send_string(command)
         self.em.send_enter()
-        self.em.send_enter()
         # check that the results are all printed before emoving on
         found = False
         while not found:
@@ -353,7 +352,7 @@ class console(object):
                 if self.findStatus(status='RUNNING'):
                     self.em.send_enter()
                     continue
-                found = ( self.findString(string='Ready', status='VM READ') or self.findString(string='CP') )
+                found = ( self.findString(string='Ready', status='VM READ'))
             except TimeoutSignal:
                 if found:
                     break
