@@ -47,7 +47,9 @@ def fetchFtpFiles() {
                 bye
             """.stripIndent()
 
-            def command = ["bash", "-c", "lftp -u ${user},${password} ${host} -e '${commands}'"]
+            // Convert list to String[] for ProcessBuilder
+            def cmdList = ["bash", "-c", "lftp -u ${user},${password} ${host} -e '${commands}'"]
+            String[] command = cmdList.toArray(new String[0])
             def process = new ProcessBuilder(command).redirectErrorStream(true).start()
             process.inputStream.eachLine { println it }
             process.waitFor()
