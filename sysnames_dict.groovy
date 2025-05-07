@@ -45,17 +45,21 @@ def fetchFtpFiles() {
                 cd GPLSRV1:APARTEST.VMSWAT.BUILDS
                 get goswat.sysnames -o goswat.tmp
                 bye
-            """.stripIndent()
+            """.stripIndent().trim()
 
-            // Convert list to String[] for ProcessBuilder
-            def cmdList = ["bash", "-c", "lftp -u ${user},${password} ${host} -e '${commands}'"]
-            String[] command = cmdList.toArray(new String[0])
-            def process = new ProcessBuilder(command).redirectErrorStream(true).start()
-            process.inputStream.eachLine { println it }
-            process.waitFor()
+            // Construct full command as pure String
+            def fullCommand = "lftp -u ${user},${password} ${host} -e \"${commands}\""
+            def process = new ProcessBuilder(["bash", "-c", fullCommand] as String[])
+                .redirectErrorStream(true)
+                .start()
 
-            if (process.exitValue() != 0) {
-                throw new RuntimeException("FTP download failed")
+            process.inputStream.withReader { reader ->
+                reader.eachLine { println it }
+            }
+
+            def exitCode = process.waitFor()
+            if (exitCode != 0) {
+                throw new RuntimeException("FTP download failed with exit code ${exitCode}")
             }
         } else {
             println "File 'goswat.tmp' already exists. Using existing file."
@@ -79,7 +83,7 @@ def fetchFtpFiles() {
                 success = true
                 break
             } catch (Exception e) {
-                // Try next encoding
+                // Continue trying next encoding
             }
         }
 
