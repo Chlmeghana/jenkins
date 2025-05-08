@@ -34,7 +34,7 @@ def extractTableSection(String content) {
 def fetchFtpFiles() {
     def host = "gdlvm7.pok.ibm.com"
     def user = "meghana"
-    def password = System.getenv("FTP_PASSWORD") ?: "Meghana@7744"
+    def password = System.getenv("FTP_PASSWORD") ?: "Meghana@2003"
     def localFile = new File("goswat.tmp")
 
     try {
