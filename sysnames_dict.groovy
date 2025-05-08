@@ -89,4 +89,4 @@ def fetchFtpFiles() {
 
 // Entry point
 def result = fetchFtpFiles()
-println result
+
