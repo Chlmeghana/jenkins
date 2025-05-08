@@ -35,43 +35,38 @@ def fetchFtpFiles() {
     def host = "gdlvm7.pok.ibm.com"
     def user = "meghana"
     def password = System.getenv("FTP_PASSWORD") ?: "Meghana@2003"
-    def localFile = new File("goswat.tmp")
+    def localFile = new File("${System.getProperty("user.home")}/goswat.tmp")
+
+    if (localFile.exists()) {
+        println "File '${localFile}' already exists. Using existing file."
+    } else {
+        println "Downloading 'goswat.sysnames' from FTP..."
+
+        def commands = """
+            cd GPLSRV1:APARTEST.VMSWAT.BUILDS
+            get goswat.sysnames -o ${localFile.absolutePath}
+            bye
+        """.stripIndent().trim()
+
+        try {
+            def lftpCommand = "lftp -u ${user},${password} ${host} -e '${commands}'"
+            def process = ["bash", "-c", lftpCommand].execute()
+            def output = new StringBuffer()
+            def error = new StringBuffer()
+            process.waitForProcessOutput(output, error)
+
+            if (error.toString().trim()) {
+                return ["<ERROR> ${error.toString().trim()}"]
+            }
+
+        } catch (Exception e) {
+            return ["<EXCEPTION> ${e.message}"]
+        }
+    }
 
     try {
-        if (!localFile.exists()) {
-            println "Downloading 'goswat.sysnames' from FTP..."
-
-            def commands = """
-                cd GPLSRV1:APARTEST.VMSWAT.BUILDS
-                get goswat.sysnames -o goswat.tmp
-                bye
-            """.stripIndent().trim()
-
-            // Construct full command as pure String
-            def fullCommand = "lftp -u ${user},${password} ${host} -e \"${commands}\""
-            def process = new ProcessBuilder(["bash", "-c", fullCommand] as String[])
-                .redirectErrorStream(true)
-                .start()
-
-            process.inputStream.withReader { reader ->
-                reader.eachLine { println it }
-            }
-
-            def exitCode = process.waitFor()
-            if (exitCode != 0) {
-                throw new RuntimeException("FTP download failed with exit code ${exitCode}")
-            }
-        } else {
-            println "File 'goswat.tmp' already exists. Using existing file."
-        }
-
-        // Read binary content
-        def bytes = Files.readAllBytes(Paths.get("goswat.tmp"))
-
-        // Try decoding with EBCDIC encodings
+        def bytes = Files.readAllBytes(localFile.toPath())
         def encodings = ["Cp500", "IBM1047", "Cp037"]
-        boolean success = false
-
         for (encoding in encodings) {
             try {
                 def decoded = new String(bytes, Charset.forName(encoding))
@@ -80,22 +75,18 @@ def fetchFtpFiles() {
                 def result = extractTableSection(decoded)
                 println result
                 println "=" * 50
-                success = true
-                break
+                return result
             } catch (Exception e) {
-                // Continue trying next encoding
+                // Try next encoding
             }
         }
 
-        if (!success) {
-            println "Could not decode using standard EBCDIC encodings."
-        }
-
+        return ["<ERROR> Could not decode using standard EBCDIC encodings."]
     } catch (Exception e) {
-        println "Error: ${e.message}"
-        e.printStackTrace()
+        return ["<EXCEPTION> ${e.message}"]
     }
 }
 
 // Entry point
-fetchFtpFiles()
+def result = fetchFtpFiles()
+println result
