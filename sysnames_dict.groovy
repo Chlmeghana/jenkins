@@ -42,11 +42,13 @@ def fetchFtpFiles() {
     } else {
         println "Downloading 'goswat.sysnames' from FTP..."
 
-        def commands = """
-            cd GPLSRV1:APARTEST.VMSWAT.BUILDS
-            get goswat.sysnames -o ${localFile.absolutePath}
-            bye
-        """.stripIndent().trim()
+def commands = """
+    set xfer:clobber yes
+    cd GPLSRV1:APARTEST.VMSWAT.BUILDS
+    get goswat.sysnames -o ${localFile.absolutePath}
+    bye
+""".stripIndent().trim()
+
 
         try {
             def lftpCommand = "lftp -u ${user},${password} ${host} -e '${commands}'"
