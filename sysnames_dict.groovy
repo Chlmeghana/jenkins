@@ -68,6 +68,7 @@ def commands = """
 
     try {
         def bytes = Files.readAllBytes(localFile.toPath())
+        println bytes
         def encodings = ["Cp500", "IBM1047", "Cp037"]
         for (encoding in encodings) {
             try {
