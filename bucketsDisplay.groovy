@@ -7,8 +7,8 @@ def host = "gdlfcft.endicott.ibm.com"
 def user = "meghana"
 def password = System.getenv("FTP_PASSWORD") ?: "B@NGAL0R"
 def lftp = "/opt/homebrew/bin/lftp"
-def bucketFile = "PXBUCKET.HTML"
-def downloadDir = new File("download")
+def bucketFile = "UHBUCKET.HTML"
+def downloadDir = new File("download1")
 downloadDir.mkdirs()
 
 // Step 1: Download PXBUCKET.HTML
@@ -59,7 +59,7 @@ subFiles.each { fileName ->
 }
 
 // Step 4: Create ZIP file
-def zipFile = new File("PXBUCKET.zip")
+def zipFile = new File("PXBUCKET2.zip")
 def zipStream = new ZipOutputStream(new FileOutputStream(zipFile))
 
 downloadDir.eachFile { file ->
