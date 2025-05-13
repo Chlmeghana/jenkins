@@ -72,7 +72,7 @@ subFiles.each { fileName ->
 }
 
 // Step 4: Create ZIP file
-def zipFile = new File("PXBUCKET2.zip")
+def zipFile = new File("Output.zip")
 def zipStream = new ZipOutputStream(new FileOutputStream(zipFile))
 
 downloadDir.eachFile { file ->
@@ -82,4 +82,4 @@ downloadDir.eachFile { file ->
 }
 zipStream.close()
 
-println "✅ PXBUCKET2.zip created with ${downloadDir.listFiles().size()} files."
+println "✅ Output.zip created with ${downloadDir.listFiles().size()} files."
