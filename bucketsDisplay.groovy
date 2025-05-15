@@ -17,6 +17,7 @@ if (downloadDir.exists()) {
 
 // Step 1: Download file.HTML
 def bucketCmds = """
+    set xfer:clobber on
     lcd ${downloadDir.absolutePath}
     get ${bucketFile}
     bye
