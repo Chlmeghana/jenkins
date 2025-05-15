@@ -9,7 +9,11 @@ def password = System.getenv("FTP_PASSWORD") ?: "B@NGAL0R"
 def lftp = "/opt/homebrew/bin/lftp"
 def bucketFile = "FETESTS.HTML"
 def downloadDir = new File("download1")
-downloadDir.mkdirs()
+if (downloadDir.exists()) {
+    downloadDir.eachFile { it.delete() }
+} else {
+    downloadDir.mkdirs()
+}
 
 // Step 1: Download PXBUCKET.HTML
 def bucketCmds = """
