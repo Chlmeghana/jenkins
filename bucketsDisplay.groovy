@@ -69,5 +69,5 @@ downloadDir.eachFile { file ->
 }
 zipStream.close()
 
-println "✅ PXBUCKET.zip created with ${subFiles.size() + 1} files."
+println "✅ ${bucketFile} created with ${subFiles.size() + 1} files."
 
