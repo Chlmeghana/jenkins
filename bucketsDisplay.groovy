@@ -15,7 +15,7 @@ if (downloadDir.exists()) {
     downloadDir.mkdirs()
 }
 
-// Step 1: Download PXBUCKET.HTML
+// Step 1: Download file.HTML
 def bucketCmds = """
     lcd ${downloadDir.absolutePath}
     get ${bucketFile}
@@ -34,7 +34,7 @@ if (bucketErr.toString().trim()) {
     System.exit(1)
 }
 
-// Step 2: Extract HTML links from PXBUCKET.HTML
+// Step 2: Extract HTML links from file.HTML
 def bucketContent = new File(downloadDir, bucketFile).getText("UTF-8")
 def matcher = (bucketContent =~ /<a href=(\S+?\.HTML)>/)
 def subFiles = matcher.collect { it[1].replaceAll(/[">]/, "") }.unique()
@@ -63,7 +63,7 @@ subFiles.each { fileName ->
 }
 
 // Step 4: Create ZIP file
-def zipFile = new File("PXBUCKET2.zip")
+def zipFile = new File("Output.zip")
 def zipStream = new ZipOutputStream(new FileOutputStream(zipFile))
 
 downloadDir.eachFile { file ->
