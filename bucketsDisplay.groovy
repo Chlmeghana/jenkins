@@ -7,7 +7,7 @@ def host = "gdlfcft.endicott.ibm.com"
 def user = "meghana"
 def password = System.getenv("FTP_PASSWORD") ?: "B@NGAL0R"
 def lftp = "/opt/homebrew/bin/lftp"
-def bucketFile = "FETESTS.HTML"
+def bucketFile = "PXBUCKET.HTML"
 def downloadDir = new File("download1")
 downloadDir.mkdirs()
 
