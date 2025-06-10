@@ -210,7 +210,7 @@ class console:
                 self.em.send_string('b')
             if self.findString('CHUGD Test Results'):
                 print("Execution succeeded")
-                c+=1
+                break
                 
             if self.findString('Ready'):
                 print("Ready;")
