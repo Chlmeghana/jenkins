@@ -284,7 +284,7 @@ if __name__ == "__main__":
             raise CMSAPIException(error_code=LOGFILE_PATH_ERROR)
         logging.basicConfig(filename=logfile_path, format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
-    commands = [f"chugd FECHUG+BY+CHUGLGBY   WS$2VU3J (FETESTS.BUCKET"]
+    commands = [f"chugd QVTST1+BY+CHUGLGBY WS$2VU3J (QV1STG1.BUCKET"]
     
     try:
         c = console(args_dict, u, p)
