@@ -96,7 +96,8 @@ class expandedEmulator(Emulator):
         non_empty = list(filter(None, s.data))
         if not quiet:
             for line in non_empty[:-1]:
-                print(line)
+                if line!= 80*" ":
+                    print("-->",line)
         return non_empty[:-1]
 
 class console:
@@ -184,25 +185,61 @@ class console:
         for command in commands:
             self.execute_command(command.rstrip())
 
-    @timeout(seconds=60)
+    
     def execute_command(self, command):
         self.em.send_clear()
         if not command:
             raise Exception('Empty command.')
-
+        c=0
+        f=0
         self.em.send_string(command)
+        self.em.send_enter()
         self.em.send_enter()
 
         while True:
+
             time.sleep(1)
             screen_lines = self.em.screen_parser(quiet=self.args['quiet'])
+            s = self.em.save_screen_string()
+            if self.findString('Executing:'):
+                f=1
+            if not self.findStatus('VM READ'):
+                print("=====================status===================",s.data[len(s.data) - 1])
             logging.debug(screen_lines)
-            if any([self.findString('Ready'), self.findString('CMS')]):
-                return
-            if self.findStatus('MORE...') or self.findString('CP') or \
-               self.findStatus('HOLDING') or self.findStatus('RUNNING'):
-                self.em.send_pa1()
+            if self.findStatus('VM READ'):
+                self.em.send_string('b')
+            if self.findString('CHUGD Test Results'):
+                print("Execution succeeded")
+                c+=1
+                
+            if self.findString('Ready'):
+                print("Ready;")
+                self.em.send_clear()
+                print("===============================================")
+                if c==1:
+                    break
+                continue
+            if self.findString('CMS'):
+                print("CMS state;")
+                self.em.send_clear()
+                print("===============================================")
+                if c==1:
+                    break
+                continue
+            while f==1 and self.findStatus('RUNNING'):
+                time.sleep(30)
+                print("Loading, Please wait.")
+            while f==1 and self.findStatus('VM READ'):
                 self.em.send_enter()
+                self.em.send_enter()
+                time.sleep(120)
+                print("Request Initiated, Please wait.")
+            if self.findStatus('MORE...') or self.findStatus('HOLDING'):
+                self.em.send_clear()
+                self.em.send_enter()
+            if self.findString('Chug Test Results'):
+                print("Execution succeeded")
+                break
 
     def logoff(self):
         self.em.send_string('logoff')
@@ -222,11 +259,7 @@ if __name__ == "__main__":
     parser.add_argument('--no-certificate-verification', action='store_true', default=False)
     parser.add_argument('-q', '--quiet', action='store_true')
     parser.add_argument('-c', '--console-on', action='store_true', default=False)
-    parser.add_argument('lpars_selection')
-    parser.add_argument('available_hatt_files')
-    parser.add_argument('target')
-    parser.add_argument('file_format')
-    parser.add_argument('testpassword')
+
 
     args = parser.parse_args()
     args_dict = vars(args)
@@ -248,7 +281,7 @@ if __name__ == "__main__":
             raise CMSAPIException(error_code=LOGFILE_PATH_ERROR)
         logging.basicConfig(filename=logfile_path, format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
-    commands = [f"chugd {args.target} {args.testpassword} ({args.available_hatt_files}"]
+    commands = [f"chugd QVTST1+BY+CHUGLGBY   WS$2VU3J (QV1STG1.BUCKET"]
     
     try:
         c = console(args_dict, u, p)
