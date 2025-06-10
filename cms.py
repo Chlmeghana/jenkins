@@ -234,7 +234,7 @@ class console:
                 self.em.send_enter()
                 time.sleep(120)
                 print("Request Initiated, Please wait.")
-            if self.findStatus('MORE...') or self.findStatus('HOLDING'):
+            if self.findStatus('MORE...') or self.findStatus('HOLDING') or self.findStatus('CP READ'):
                 self.em.send_clear()
                 self.em.send_enter()
             if self.findString('Chug Test Results'):
