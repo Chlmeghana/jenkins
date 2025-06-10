@@ -86,7 +86,7 @@ def downloadDir = new File("Output")
 
 // Prompt for file name
 print "Enter the name of the HTML file to download (e.g., FETESTS.HTML): "
-def bucketFile = System.console().readLine()?.trim()
+def bucketFile = "QV1STG1.HTML"
 
 if (!bucketFile || !bucketFile.toUpperCase().endsWith(".HTML")) {
     println "❌ Invalid file name."
