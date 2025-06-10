@@ -201,6 +201,9 @@ class console:
             time.sleep(1)
             screen_lines = self.em.screen_parser(quiet=self.args['quiet'])
             s = self.em.save_screen_string()
+            if self.findStatus('CP READ'):
+                self.em.send_string('i cms')
+                self.em.send_enter()
             if self.findString('Executing:'):
                 f=1
             if not self.findStatus('VM READ'):
