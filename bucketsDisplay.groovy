@@ -176,6 +176,3 @@ downloadDir.eachFile { file ->
 zipStream.close()
 
 println "\n✅ ZIP file 'OUTPUT.zip' created with ${allFiles.size()} files."
-
-println "✅ ${bucketFile} created with ${subFiles.size() + 1} files."
-
