@@ -376,7 +376,9 @@ class console:
         self.em.terminate()
 
 if __name__ == "__main__":
-    lpar="GDLFCFT"
+    parser.add_argument('abc', help='Provide abc as positional arg')
+    parser.add_argument('abc', help='Provide abc as positional arg')
+    lpar=sys.argv[
     execfile="QV1STG1.BUCKET"
     address,filename=main(lpar,execfile)
     print(address,filename)
