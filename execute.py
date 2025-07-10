@@ -10,7 +10,6 @@ import logging
 from py3270 import Emulator, CommandError
 from functools import wraps
 from execVM7 import main
-from bucketsDisplay.g
 # Return codes
 ALL_FINE = 0
 NO_LOGON_SCREEN = 1
