@@ -377,10 +377,8 @@ class console:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="CMS 3270 Automation Tool")
-    parser.add_argument('abc', help='Provide abc as positional arg')
-    parser.add_argument('abc', help='Provide abc as positional arg')
-    lpar=sys.argv[2]
-    execfile=sys.argv[3]
+    lpar="GDLFCFT"
+    execfile="QV1STG1.BUCKET"
     print("========",lpar,execfile)
     address,filename=main(lpar,execfile)
     print(address,filename)
