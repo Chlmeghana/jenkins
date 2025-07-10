@@ -378,7 +378,6 @@ class console:
 if __name__ == "__main__":
     lpar="GDLFCFT"
     execfile="QV1STG1.BUCKET"
-    print("hihihi")
     address,filename=main(lpar,execfile)
     print(address,filename)
     parser = argparse.ArgumentParser(description="CMS 3270 Automation Tool")
@@ -418,7 +417,6 @@ if __name__ == "__main__":
         if r != ALL_FINE:
             raise CMSAPIException(error_code=r)
         testid,testpass=c.fun(filename)
-        print(testid,testpass,"===========")
         
         commands = [f"chugd {testid} {testpass} ({execfile}"]
         print(commands,"=============")
