@@ -191,7 +191,7 @@ class console:
         self.em.send_string(f'logon meghana')
         self.em.send_enter()
         time.sleep(1)
-        self.em.send_string(self.__password)
+        self.em.send_string('Meghana@2003')
         self.em.send_enter()
         time.sleep(1)
 
