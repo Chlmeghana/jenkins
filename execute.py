@@ -381,6 +381,7 @@ if __name__ == "__main__":
     parser.add_argument('abc', help='Provide abc as positional arg')
     lpar=sys.argv[2]
     execfile=sys.argv[3]
+    print("========",lpar,execfile)
     address,filename=main(lpar,execfile)
     print(address,filename)
     parser = argparse.ArgumentParser(description="CMS 3270 Automation Tool")
@@ -425,7 +426,6 @@ if __name__ == "__main__":
         commands = [f"chugd {testid} {testpass} ({execfile}"]
         print(commands,"=============")
         c.execute_all(commands)
-        main_fun(address,userid,password,execfile)
         c.logoff()
     except CMSAPIException as ex:
         print(f"Error: {ex}")
