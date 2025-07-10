@@ -83,9 +83,6 @@ def user = "meghana"
 def password = System.getenv("FTP_PASSWORD") ?: "B@NGAL0R"
 def lftp = "/opt/homebrew/bin/lftp"
 def downloadDir = new File("Output")
-
-// Prompt for file name
-print "Enter the name of the HTML file to download (e.g., FETESTS.HTML): "
 def bucketFile = "QV1STG1.HTML"
 
 if (!bucketFile || !bucketFile.toUpperCase().endsWith(".HTML")) {
