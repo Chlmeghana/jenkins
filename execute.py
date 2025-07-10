@@ -100,21 +100,21 @@ class expandedEmulator(Emulator):
                     print("-->",line)
         return non_empty[:-1]
     def screen_chug_spool(self,filename= None, quiet=False):
-        print("screen of chug fun called")
+      #  print("screen of chug fun called")
         s = self.save_screen_string()
         non_empty = list(filter(None, s.data))
         if not quiet:
             for line in non_empty[:-2]:
                 if line != 80*" ":
                     if filename in line:
-                        print("lineeeee",line)
+                       # print("lineeeee",line)
                         a=line.split(" ")
                         a=[item for item in a if item != '']
-                        print(a)
+                      #  print(a)
                         if a[1].startswith("*"):
                             continue
-                        print(a[1],a[2])
-                        print("returning password")
+                     #   print(a[1],a[2])
+                        print("Returning Test Credentials")
                         self.exec_command(b'PF(3)')
                         self.exec_command(b'PF(3)')
                         return a[1],a[2]
