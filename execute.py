@@ -378,7 +378,6 @@ class console:
 if __name__ == "__main__":
     lpar="GDLFCFT"
     execfile="QV1STG1.BUCKET"
-    print("hihihi")
     address,filename=main(lpar,execfile)
     print(address,filename)
     parser = argparse.ArgumentParser(description="CMS 3270 Automation Tool")
