@@ -183,7 +183,7 @@ class console:
             return NO_LOGON_SCREEN
 
     def logon(self):
-       # print("logon function called")
+        print("logon function called")
         if self.find_logon_screen() != ALL_FINE:
             return NO_LOGON_SCREEN
 
@@ -191,7 +191,7 @@ class console:
         self.em.send_string(f'logon meghana')
         self.em.send_enter()
         time.sleep(1)
-        self.em.send_string('Meghana@2003')
+        self.em.send_string(self.__password)
         self.em.send_enter()
         time.sleep(1)
 
@@ -237,7 +237,7 @@ class console:
         while True:
             screen_lines = self.em.bucketinfo(file,flag, quiet=self.args['quiet'])
             if screen_lines=="no bucket found":
-               # print("no bucket found")
+                print("no bucket found")
                 self.em.exec_command(b'PF(7)')
                 screen_lines = self.em.bucketinfo(file,flag, quiet=self.args['quiet'])
                 print("clicked pf7 ",screen_lines)
@@ -345,7 +345,7 @@ class console:
         self.em.terminate()
 
 def main(lpar,execfile):
-   # print("main from execvm7=================")
+    print("main from execvm7=================")
     adress="gdlvm7.pok.ibm.com"
     parser = argparse.ArgumentParser(description="CMS 3270 Automation Tool")
     parser.add_argument('--host', default=adress)
