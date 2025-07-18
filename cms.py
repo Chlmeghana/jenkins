@@ -251,7 +251,7 @@ class console:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="CMS 3270 Automation Tool")
-    parser.add_argument('--host', required=True)
+    parser.add_argument('--host', default="gdlfcft.endicott.ibm.com")
     parser.add_argument('-u', '--username', default=None)
     parser.add_argument('-e', '--env_cred', nargs=2, metavar=('username', 'password'))
     parser.add_argument('-l', '--logfile', default=None)
