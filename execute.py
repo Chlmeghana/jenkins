@@ -378,16 +378,16 @@ class console:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="CMS 3270 Automation Tool")
-    parser.add_argument('abc', help='Provide abc as positional arg')
-    parser.add_argument('abc', help='Provide abc as positional arg')
-    lpar=sys.argv[4]
-    execfile=sys.argv[5]
-    print("----printing lpar,executed filename----",lpar,execfile)
-    address,filename=main(lpar,execfile)
+    parser.add_argument('-e', '--env_cred', nargs=2, metavar=('username', 'password'))
+    parser.add_argument('lpar', help='LPAR name')
+    parser.add_argument('filename', help='File to process')
+    args = parser.parse_args()
+    print("----printing lpar,executed filename----",args.lpar,args.filename)
+    address,filename=main(args.lpar, args.filename)
     print(address,filename)
     parser.add_argument('--host',default=address)
     parser.add_argument('-u', '--username', default=None)
-    parser.add_argument('-e', '--env_cred', nargs=2, metavar=('username', 'password'))
+    
     parser.add_argument('-l', '--logfile', default=None)
     parser.add_argument('-t', '--traceback', action='store_true', default=False)
     parser.add_argument('--no-certificate-verification', action='store_true', default=False)
