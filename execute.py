@@ -10,6 +10,7 @@ import logging
 from py3270 import Emulator, CommandError
 from functools import wraps
 from execVM7 import main
+import sys
 # Return codes
 ALL_FINE = 0
 NO_LOGON_SCREEN = 1
@@ -376,8 +377,9 @@ class console:
         self.em.terminate()
 
 if __name__ == "__main__":
-    lpar="GDLFCFT"
-    execfile="QV1STG1.BUCKET"
+    lpar=sys.argv[2]
+    execfile=sys.argv[3]
+    print("----printing lpar----",lpar,execfile)
     address,filename=main(lpar,execfile)
     print(address,filename)
     parser = argparse.ArgumentParser(description="CMS 3270 Automation Tool")
