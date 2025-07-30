@@ -342,7 +342,7 @@ class console:
             logging.debug(screen_lines)
             if self.findStatus('VM READ'):
                 self.em.send_string('b')
-            if self.findString('CHUGD Test Results') or self.findString("failures") or self.findString(f"Bucket: {execfile} BUCKET *") or (f==1 and self.findString("Ready; T")):
+            if self.findString('CHUGD Test Results') or self.findString("failures") or self.findString(f": {execfile}  *") or (f==1 and self.findString("Ready; T")):
                 print("===================Execution succeeded==================")
                 break
             if self.findString('Ready'):
@@ -378,7 +378,7 @@ class console:
 
 if __name__ == "__main__":
     lpar="GDLFCFT"
-    execfile="LGRARCLY.BUCKET"
+    execfile="FETESTS.BUCKET"
     print("hihihi")
     address,filename=main(lpar,execfile)
     print(address,filename)
