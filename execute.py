@@ -378,7 +378,7 @@ class console:
 
 if __name__ == "__main__":
     lpar="GDLFCFT"
-    execfile="FETESTS.BUCKET"
+    execfile="JHICF.BUCKET"
     print("hihihi")
     address,filename=main(lpar,execfile)
     print(address,filename)
