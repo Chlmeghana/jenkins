@@ -83,7 +83,7 @@ def user = "meghana"
 def password = System.getenv("FTP_PASSWORD") ?: "B@NGAL0R"
 def lftp = "/opt/homebrew/bin/lftp"
 def downloadDir = new File("Output")
-def bucketFile = "QV1STG1.HTML"
+def bucketFile = "JHICF.HTML"
 
 if (!bucketFile || !bucketFile.toUpperCase().endsWith(".HTML")) {
     println "❌ Invalid file name."
