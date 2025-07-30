@@ -377,8 +377,8 @@ class console:
         self.em.terminate()
 
 if __name__ == "__main__":
-    lpar=sys.argv[2]
-    execfile=sys.argv[3]
+    lpar=sys.argv[4]
+    execfile=sys.argv[5]
     print("----printing lpar----",lpar,execfile)
     address,filename=main(lpar,execfile)
     print(address,filename)
