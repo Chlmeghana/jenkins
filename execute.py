@@ -377,40 +377,24 @@ class console:
         self.em.terminate()
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="CMS 3270 Automation Tool", 
-                                   usage="%(prog)s -e username password LPAR FILENAME [options]")
-    
-    # Required -e argument
-    parser.add_argument('-e', '--env_cred', nargs=2, required=True,
-                      metavar=('username', 'password'),
-                      help='Environment credentials (required)')
-    
-    # These will be caught as positional arguments
-    parser.add_argument('lpar', help='LPAR name')
-    parser.add_argument('filename', help='File to process')
-    parser.add_argument('--host', help='Host address')
-    parser.add_argument('-u', '--username', help='Username')
-    parser.add_argument('-l', '--logfile', help='Log file path')
-    parser.add_argument('-t', '--traceback', action='store_true',
-                      help='Enable traceback')
-    parser.add_argument('--no-certificate-verification', action='store_true',
-                      help='Disable certificate verification')
-    parser.add_argument('-q', '--quiet', action='store_true',
-                      help='Quiet mode')
-    parser.add_argument('-c', '--console-on', action='store_true',
-                      help='Enable console')
+    lpar="GDLFCFT"
+    execfile="LGRARCLY.BUCKET"
+    print("hihihi")
+    address,filename=main(lpar,execfile)
+    print(address,filename)
+    parser = argparse.ArgumentParser(description="CMS 3270 Automation Tool")
+    parser.add_argument('--host',default=address)
+    parser.add_argument('-u', '--username', default=None)
+    parser.add_argument('-e', '--env_cred', nargs=2, metavar=('username', 'password'))
+    parser.add_argument('-l', '--logfile', default=None)
+    parser.add_argument('-t', '--traceback', action='store_true', default=False)
+    parser.add_argument('--no-certificate-verification', action='store_true', default=False)
+    parser.add_argument('-q', '--quiet', action='store_true')
+    parser.add_argument('-c', '--console-on', action='store_true', default=False)
+
+
     args = parser.parse_args()
-    
-    # Call your main function
-    address, processed_filename = main(args.lpar, args.filename)
-    
-    # Set host default if not provided
-    if args.host is None:
-        args.host = address
-    
-    print(f"Connected to: {args.host}")
-    print(f"Processing file: {processed_filename}")
-    print(f"Using credentials: {args.env_cred[0]}")
+    args_dict = vars(args)
 
     if not args.traceback:
         sys.tracebacklimit = 0
