@@ -377,14 +377,14 @@ class console:
         self.em.terminate()
 
 if __name__ == "__main__":
-    lpar=sys.argv[4]
-    execfile=sys.argv[5]
-    print("----printing lpar----",lpar,execfile)
-    address,filename=main(lpar,execfile)
-    print(address,filename)
     parser = argparse.ArgumentParser(description="CMS 3270 Automation Tool")
     parser.add_argument('abc', help='Provide abc as positional arg')
     parser.add_argument('abc', help='Provide abc as positional arg')
+    lpar=sys.argv[4]
+    execfile=sys.argv[5]
+    print("----printing lpar,executed filename----",lpar,execfile)
+    address,filename=main(lpar,execfile)
+    print(address,filename)
     parser.add_argument('--host',default=address)
     parser.add_argument('-u', '--username', default=None)
     parser.add_argument('-e', '--env_cred', nargs=2, metavar=('username', 'password'))
