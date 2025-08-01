@@ -1,0 +1,630 @@
+Raghavendra Nayak
+  12:26 PM
+https://www.ibm.com/docs/en/zvm/7.4.0?topic=vehicle-iucv-overview
+
+
+Lakshmi Meghana Chekka
+  12:27 PM
+:smiley::+1: ಧನ್ಯವಾದಗಳು raghu
+
+
+Raghavendra Nayak
+  12:27 PM
+yappa
+
+
+Lakshmi Meghana Chekka
+  11:25 AM
+Hi
+11:25
+try {
+        def bytes = Files.readAllBytes(localFile.toPath())
+        def encodings = ["Cp500", "IBM1047", "Cp037"]
+        for (encoding in encodings) {
+            try {
+                def decoded = new String(bytes, Charset.forName(encoding))
+                println "Successfully decoded with $encoding"
+                println "=" * 50
+                def result = extractTableSection(decoded)
+                println result
+                println "=" * 50
+                return result
+            } catch (Exception e) {
+                // Try next encoding
+            }
+        }
+11:25
+I donno whether this works
+In my intern project I also faced the encryption issue
+then i tried this encodings
+
+
+Raghavendra Nayak
+  11:27 AM
+yes. I used some built in decryption in C
+11:28
+For now it is working!
+11:28
+/**
+ * Convert an ASCII buffer to EBCDIC-US in place.
+ * @param ascii_in    The ASCII input buffer.
+ * @param ascii_len   Length of ascii_in.
+ * @param ebcdic_out  Output buffer (must be >= ascii_len).
+ * @return Number of bytes written to ebcdic_out, or -1 on error.
+ */
+int ascii_to_ebcdic(const char *ascii_in, size_t ascii_len,
+                    char *ebcdic_out) {
+    iconv_t cd = iconv_open("EBCDIC-US", "ASCII");
+    if (cd == (iconv_t)-1) {
+        perror("iconv_open");
+        return -1;
+    }
+
+    char *inbuf  = (char *)ascii_in;
+    char *outbuf = ebcdic_out;
+    size_t inbytesleft  = ascii_len;
+    size_t outbytesleft = ascii_len;
+
+    memset(ebcdic_out, 0, ascii_len);
+    if (iconv(cd, &inbuf, &inbytesleft, &outbuf, &outbytesleft) == (size_t)-1) {
+        perror("iconv");
+        iconv_close(cd);
+        return -1;
+    }
+    iconv_close(cd);
+    return (int)(ascii_len - outbytesleft);
+}
+11:28
+urs is also similar one.
+11:29
+I wont change from my side as it is just POC. May be at the time of official implementation we will see which one to pick
+:+1:
+1
+
+
+
+Lakshmi Meghana Chekka
+  11:29 AM
+
+
+
+Ansuman Mohanty
+  112       /* Accept new connections from clients                          */
+  113       if keyword='READ' & ts=s then do
+  114         nsn = Socket('Accept',s)
+  115         if src=0 then do
+  116           parse var nsn ns . np nia .
+Show more
+Direct Message | Mar 13th | View conversation
+
+1 reply
+Today at 11:30 AMView thread
+
+
+Lakshmi Meghana Chekka
+  11:30 AM
+replied to a thread:
+ 112       /* Accept new connections from clients                          */…
+This is rexx code... In rexx once I tried this command... ascii_on for encrytion (edited) 
+11:31
+call Socket 'SetSockOpt', ns, 'Sol_Socket', 'SO_ASCII', 'On'
+
+vmlink .dir GPLSRV1:APARTEST.VMSWAT.BUILD/GOSWAT.SYSNAMES
+10:43
+i worked on jenkins
+10:43
+previously ts in my local files
+
+
+Lakshmi Meghana Chekka
+  12:12 PM
+i integetrated the dropdowns and bucket execution and displaying html files
+now its working full pledged
+12:12
+Cathy Hupman 6 minutes 38 seconds
+But there's a Chuck bug user ID on each system, and if you look at its a disc, there's a chug spool ID.
+
+
+Lakshmi Meghana Chekka
+  2:42 PM
+yml file
+2:43
+So the problem with looking at the head file is that it's only good as the person who's updating the comment. So if the comment is not updated, that information is gonna be wrong, but the chug spool file it's gonna be correct, so it has all the bucket it's running, it has a user ID running and if you look at that file, you're gonna find out that.
+
+
+Lakshmi Meghana Chekka
+  12:15 AM
+vmlink .dir GPLSRV1:APARTEST.VMSWAT.BUILDS
+DMSVML2060I GPLSRV1:APARTEST.VMSWAT.BUILDS accessed as file mode R
+
+
+Lakshmi Meghana Chekka
+  10:34 AM
+i have done some handson in autologging, code enhancement, and also i tried using lftp for accessing the chug file to make its automation but its refusing the connection,
+10:37
+and changed the result data structures so that now its not missing content and transmitting all the screen content to jenkins console
+
+
+Lakshmi Meghana Chekka
+  11:01 AM
+chug output
+
+
+Lakshmi Meghana Chekka
+  4:22 PM
+vmlink chugbuck 191
+
+
+Lakshmi Meghana Chekka
+  10:29 AM
+yesterday i had a meeting with jeff, i am facing an issue with accessing a dasd, so he gave access to it, and also im facing trouble in executing bucket/hatt files inside another bucket files cause those test cred is not present in chug spool file, so he gave a directory which has all the bucket and its sub files.. now i will be able to execute those files individually also
+
+
+Lakshmi Meghana Chekka
+  10:37 AM
+on friday i worked on python script making it more user friendly by adding more debugging statements and integrated the system in full extent... i will demonstrate it to sowmiya... and the next step is to upload the jobs and codes into fredrick jenkins
+
+
+Lakshmi Meghana Chekka
+  12:38 PM
+chugd QVTST1+BY+CHUGLGBY WS$2VU3J (QV1STG1.BUCKET
+
+
+Lakshmi Meghana Chekka
+  10:48 AM
+clickup ai
+
+
+Lakshmi Meghana Chekka
+  10:27 PM
+FECHUG+BY+CHUGLGBY   WS$2VU3J (FETESTS.BUCKET
+
+Basic Connection & Session Commands
+connect(host) - Connect to a host
+disconnect() - Disconnect from the host
+is_connected() - Check connection status
+wait_for_field() - Wait until the screen is ready
+Screen Interaction Commands
+move_to(row, col) - Move cursor to specified position
+send_string(text) - Send text to current cursor position
+send_enter() - Send Enter key
+send_pf(n) - Send PF key (1-24)
+send_pa(n) - Send PA key (1-3)
+send_clear() - Send Clear key
+send_tab() - Send Tab key
+send_backtab() - Send Backtab key
+Screen Reading Commands
+string_get(row, col, length) - Get string at position
+string_found(text) - Check if text exists on screen
+exec_command(command) - Send raw x3270 command
+status() - Get emulator status
+ascii() - Get entire screen as ASCII text
+asciirow(row) - Get specific row as ASCII text
+Field Navigation Commands
+next_field() - Move to next input field
+previous_field() - Move to previous input field
+field_count() - Count of fields on screen
+Special Keys
+send_attention() - Send Attention (Enter) key
+send_backspace() - Send Backspace
+send_delete() - Send Delete
+send_reset() - Send Reset
+Error Handling
+CommandError - Exception raised when emulator commands fail
+timeout parameter - Available on most methods to set wait time
+Type profile exec b
+
+
+Lakshmi Meghana Chekka
+  12:14 PM
+
+'ACCESS GPLSRV1:TOMDEF.ASM U'                            
+/* 'GLOBAL MACLIB TDMACLIB OSMACRO OSMACRO1 ALLMACRO' */ 
+'GLOBAL MACLIB TDMACLIB OSMACRO OSMACRO1'                
+                                                         
+'LINK DATABASE 233 233 RR'                               
+'ACCESS 233 L'                                           
+/* 'ACCESS GPLSRV2:JHERNE.CMSCODEMGR K' */               
+12:18
+DMSACR723I U (GPLSRV1:TOMDEF.ASM) R/O                           
+RPIMGR032E YOU ARE NOT AUTHORIZED TO LINK TO DATABASE.233       
+HCPLNM298E DATABASE 0233 not linked; request denied             
+
+
+Lakshmi Meghana Chekka
+  12:25 PM
+pf9 for receiving
+https://github.ibm.com/zVM/linux-toolbox
+Initiating SAML single sign-on
+ https://plugins.jenkins.io/lockable-resources/
+Lockable Resources
+This plugin allows to define external resources (such as printers, phones, computers) that can be locked by builds. If a build requires an external resource which is already locked, it will wait fo...
+
+plugins.jenkins.io
+Lockable Resources
+This plugin allows to define external resources (such as printers, phones, computers) that can be locked by builds. If a build requires an external resource which is already locked, it will wait for the resource to be free. (496 kB)
+https://plugins.jenkins.io/lockable-resources/
+
+
+
+Lakshmi Meghana Chekka
+  10:38 AM
+For accessing the ip adress of each lpar... i am accessing the directory which has lpar with its corresponding ip adress, but im unable to access the data, cause ithe emulator im using is limited to get 80 characters from each line, so i need to change model number of emulator, i m working on it, it works, i will try to execute bucket files from different lpars also... only that part is left
+Lakshmi Meghana Chekka
+  2:44 PM
+Sct1-dcr603
+2:45
+803-qztxold
+2:45
+
+
+
+Sowmiya P
+GDLMCT2 - SOWMIYAP pwd - TCPIP
+803/808/807/SCT1/805/806/gdlmct1 - SOWMIYAP pwd - P1CH@ND1
+Direct Message | Jul 2nd | View conversation
+2:46
+Mct1-account
+2:46
+Mct1-d0r02
+2:49
+805-d0r25,qsxspag
+806-vb1buck
+807-qsxspag
+808-cccddir
+
+
+
+
+
+
+
+Lakshmi Meghana Chekka
+  10:31 AM
+mct2:QRYLELVL
+
+
+
+
+
+Lakshmi Meghana Chekka
+  12:29 PM
+
+
+
+Raghavendra Nayak
+https://www.ibm.com/docs/en/zvm/7.4.0?topic=vehicle-iucv-overview
+Direct Message | Jul 28th | View conversation
+12:29
+
+
+
+Sowmiya P
+https://lnxzvmb.boeblingen.de.ibm.com/jenkins/
+Direct Message | Jul 25th | View conversation
+12:30
+
+
+
+Sowmiya P
+https://ibm.ent.box.com/folder/332599477348
+Direct Message | Jul 25th | View conversation
+12:34
+
+
+
+Ansuman Mohanty
+https://github.ibm.com/Ansuman-Mohanty/zvm-hackathon
+Direct Message | Jul 17th | View conversation
+
+
+Lakshmi Meghana Chekka
+  2:22 PM
+Lakshmi Meghana Chekka joined the z/VM Component and Functional Testing Team as an intern and has gained valuable insights while honing her problem-solving skills. During her internship journey, she worked on an automation project, the z/VM Test Hub: One-Click CFT Execution with a Modern UI which is to develop a user-friendly interface for selecting and executing sanity test cases on various
+target systems (LPAR/z/VM). Integrate authentication mechanisms, flexible reporting formats (CSV, HTML, Excel),
+and scheduling options while providing real-time execution control (abort, pause, resume).
+She is deeply passionate about coding and software development, with a particular interest in programming languages like Python and Java. She thrive on being a good team player, collaborating effectively with others to achieve shared goals. Her ability to grasp new concepts quickly has proven invaluable in her journey as a developer, allowing her to adapt swiftly to new technologies and frameworks. She recently graduated from Pragati Engineering College in Computer Science Department and is joining us as a developer in Linux tooling team in z/VM. She also gives some active participation in team building activities and also participated in hackathons like Robyck. Please join me in giving Lakshmi Meghana a warm welcome as she begins this exciting new chapter with us at IBM. (edited) 
+
+
+Lakshmi Meghana Chekka
+  2:04 PM
+DWPLEXA1+BY+CHUGLGBY WS$2VU3J (LGRARCLY.BUCKET
+
+
+
+
+
+
+gdlfcft.endicott.ibm.com
+B@NGAL0R
+Issues :
+Trying to connect Jenkins from host on demand connection is getting refused from host even if I am trying from different port
+In GDLVM7 cannot able to run test cases but that pipeline code in Jenkins has GDLVM7 test cases
+We are able to run the pipeline and getting executed but not able to convert it into csv/html file
+(venv) lakshmimeghanachekka@Lakshmis-MacBook-Pro PySmapi-main % source $(poetry env info --path)/bin/activate
+zsh: command not found: poetry
+source: no such file or directory: /bin/activate
+Chug files
+lftp -u meghana
+Ls
+get HELLO.EXEC
+B@NGAL0R
+lftp meghana@gdlvm7.pok.ibm.com:~>
+lftp -u meghana gdlfcft.endicott.ibm.com
+Connecting to gdlfcft.endicott.ibm.com (pi) port 21
+Chugd sowmiyap P1CH@ND1 (DUMPWARN.hatt
+INTESTID
+CF7TEST5
+chugd INTESTID CF7TEST5 (LGRJG3B3.hatt
+chugd INTESTID CF7TEST5 (744BUCKE.bucket
+SEND sowmiyap AT GDLSCT1 CHUGD isdlchug 1sdlI5dl (test.hatt
+API token for API project : 11249bdacd87342fc2c21adf74f9876bce
+Setshare.yml implementation:
+ansible-playbook -e "zvm_host=gdlfcft.endicott.ibm.com zvm_user=meghana zvm_password=B@NGL0R” setshare.yml -vvv
+nicdef.yml implementation:
+ansible-playbook -e "zvm_host=gdlfcft.endicott.ibm.com zvm_user=meghana zvm_password=B@NGL0R" nicdef.yml -vvv
+http://sasvpn00.boulder.ibm.com/macOS-SYSTEMS
+- name: Execute HATT File on z/VM
+ hosts: localhost
+ tasks:
+  - name: Run HATT script via SMAPI
+   command: "python3 ./plugins/module_utils/psmapi.py call_client gdlfcft.endicott.ibm.com 2023 meghana B@NGL0R 'chugd sowmiya P1CH@ND1(jenkins.hatt'"
+Sanjeevi
+Intern@2
+myclient 10 9.56.214.105
+rsclient 10 9.56.214.105
+Make the reserve run the chug command
+Make the Jenkins access the html from the server
+myclient 1 9.56.214.105
+sendfile myserver exec A meghana at gdlfcft
+Save my server exec A
+SEND sowmiyap AT GDLFCFT CHUGD INTESTID CF7TEST5 (UYBUCKET.bucket
+    def command = "curl -s https://github.com/Chlmeghana/jenkins/blob/main/fetch_files.py | python3 -"
+    def fileList = command.execute().text.readLines()
+    return fileList
+GDLFCFT
+GDLSCT1
+GDLLCPX1
+GDLLCPX2
+GDLLCPX3
+GDLMCPX4
+GDLBCT3
+GDLEPAT
+GDLMCT1
+GDLSADP1
+GDLSADP2
+GDLCT801
+GDLCT802
+GDLCT803
+GDLCT804
+GDLCT805
+GDLCT806
+GDLCT807
+GDLCT808
+GDLVNET1
+GDLVNET2
+def AVAILABLE_HATT_FILES = [
+  'SELECT': ['LPAR NOT SELECTED'],
+  'GDLFCFT': ['a','b'],
+  'CPU_Pooling': ['No pooling', 'Limit hard', 'Capacity', 'Mix (Limit + capacity)'],
+  'Network': ['Str OSA direct', 'Str Hipersockets', 'Str Vswitch', 'RR OSA direct', 'RR Hipersockets', 'RR Vswitch'],
+  'LGR': ['Large Idle Guest Relocation', '25 Guests Relocation'],
+  'Virtsor': ['Run-1', 'Run-2']
+]
+def selectedfile = LPARS_SELECTION
+return AVAILABLE_HATT_FILES[selectedfile] ?: ['NO AVAILABLE HATT FILES']
+  def host = "gdlfcft.endicott.ibm.com"
+  def user = "meghana"
+  def password = "B@NGAL0R" // For security, consider fetching this from environment variables.
+  try {
+    def command = "lftp -u ${user},${password} ${host} -e 'ls *.HATT; bye'"
+    def process = ['bash', '-c', command].execute()
+    def output = new StringBuffer()
+    def error = new StringBuffer()
+    process.waitForProcessOutput(output, error)
+    if (error) {
+      println "Error: $error"
+      return []
+    } else {
+      def fileList = (output.toString() =~ /\b[A-Z0-9]+\.HATT\b/)*.toString()
+      return fileList
+    }
+  } catch (Exception e) {
+    println "Error: ${e.message}"
+    return []
+  }
+Use sleep command for pause
+def fetchFtpFiles() {
+  def host = "gdlfcft.endicott.ibm.com"
+  def user = "meghana"
+  def password = "B@NGAL0R" // For security, consider fetching this from environment variables.
+  try {
+    def proc = "pwd".execute()
+    def b = new StringBuffer()
+    proc.consumeProcessOutput(b, System.err)
+    return [user,password]
+    def arg2 = b.toString()
+  } catch (Exception e) {
+    println "Error: ${e.message}"
+    return []
+  }
+}
+def result = fetchFtpFiles()
+return result
+  def save_all_screens(self):
+    all_data = []
+    seen_pages = set()
+    while True:
+      screen = self.exec_command(b'PrintText(string)')
+      page_data = []
+      for i in range(len(screen.data)):
+        line = screen.data[i].decode('utf-8')
+        page_data.append(line)
+    # Use tuple of lines as a hashable representation of the screen
+      page_tuple = tuple(page_data)
+    # Stop if the page is empty or we've seen it before (no more pages)
+      if not any(line.strip() for line in page_data) or page_tuple in seen_pages:
+        break
+      seen_pages.add(page_tuple)
+      all_data.extend(page_data)
+    # Go to next page
+      self.exec_command(b'PF(8)')
+    time.sleep(1) # Allow screen time to refresh
+    return all_data
+Dar for u9,customer cases updated
+Pls related configuration, ssl upgrade and ssl
+Customer , handshake error,
+Infrastructure, discussion on it, infrasture, customer, case, load balancing,
+Sort manager, had part, cache ratio issue , smtp code working fine
+Crypo training, 990 port,
+Red socket enhancement test cases, pls errors replicate
+Crypto,
+Tar, socket,
+import subprocess
+import os
+def fetch_ftp_files():
+  host = "gdlvm7.pok.ibm.com" # Remove trailing space!
+  user = "meghana"
+  password = os.getenv("FTP_PASSWORD", "Meghana@7744")
+  try:
+    # 1. First download the file (binary mode)
+    commands = """
+    cd GPLSRV1:APARTEST.VMSWAT.BUILDS
+    get goswat.sysnames -o goswat.tmp
+    bye
+    """
+    subprocess.run(
+      f"lftp -u {user},{password} {host} -e '{commands}'",
+      shell=True,
+      check=True
+    )
+    # 2. Read the binary file and decode from EBCDIC
+    with open("goswat.tmp", "rb") as f:
+      ebcdic_bytes = f.read()
+    # Try common IBM EBCDIC code pages
+    for encoding in ["cp500", "ibm1047", "ibm037"]:
+      try:
+        content = ebcdic_bytes.decode(encoding)
+        print("Successfully decoded with", encoding)
+        print("="*50)
+        print(content)
+        print("="*50)
+        return
+      except UnicodeDecodeError:
+        continue
+    # Fallback if no encoding worked
+    print("Could not decode with standard EBCDIC, showing raw:")
+    print(ebcdic_bytes.decode("latin1", errors="replace"))
+  except Exception as e:
+    print(f"Error: {e}")
+if __name__ == "__main__":
+  fetch_ftp_files()
+(venv) lakshmimeghanachekka@lakshmis-mbp zvm.linux % groovy filenames.groovy——15seconds
+echo "Selected output format: $OUTPUT_FORMAT"
+# Remove old file link (if any)
+rm -f test_summary_output.*
+# Rename the correct output file based on selected format
+if [ "$OUTPUT_FORMAT" = "HTML" ]; then
+  mv test_summary.html test_summary_output.html
+elif [ "$OUTPUT_FORMAT" = "CSV" ]; then
+  mv test_summary.csv test_summary_output.csv
+elif [ "$OUTPUT_FORMAT" = "EXCEL" ]; then
+  mv test_summary.xlsx test_summary_output.xlsx
+else
+  echo "Unknown OUTPUT_FORMAT: $OUTPUT_FORMAT"
+  exit 1
+fi
+import java.nio.file.*
+import java.nio.charset.Charset
+import java.util.zip.ZipOutputStream
+import java.util.zip.ZipEntry
+def host = "gdlfcft.endicott.ibm.com"
+def user = "meghana"
+def password = System.getenv("FTP_PASSWORD") ?: "B@NGAL0R"
+def lftp = "/opt/homebrew/bin/lftp"
+def bucketFile = "PXBUCKET.bucket"
+def downloadDir = new File("download1")
+downloadDir.mkdirs()
+// Step 1: Download UHBUCKET.HTML if not already downloaded
+def bucketTarget = new File(downloadDir, bucketFile)
+if (!bucketTarget.exists()) {
+  def bucketCmds = """
+    lcd ${downloadDir.absolutePath}
+    set xfer:clobber on
+    get ${bucketFile}
+    bye
+  """.stripIndent().trim()
+  println "Downloading ${bucketFile}..."
+  def bucketDownloadCmd = "${lftp} -u ${user},${password} ${host} -e '${bucketCmds}'"
+  def bucketProcess = ["bash", "-c", bucketDownloadCmd].execute()
+  def bucketOut = new ByteArrayOutputStream()
+  def bucketErr = new ByteArrayOutputStream()
+  bucketProcess.waitForProcessOutput(bucketOut, bucketErr)
+  if (bucketErr.toString().trim()) {
+    println "Error downloading ${bucketFile}:\n" + bucketErr.toString()
+    System.exit(1)
+  }
+} else {
+  println "${bucketFile} already exists, skipping download."
+}
+// Step 2: Extract HTML links from UHBUCKET.HTML
+def bucketContent = bucketTarget.getText("UTF-8")
+def matcher = (bucketContent =~ /<a href=(\S+?\.HTML)>/)
+def subFiles = matcher.collect { it[1].replaceAll(/[">]/, "") }.unique()
+println "Sub HTML files to download:"
+subFiles.each { println "- ${it}" }
+// Step 3: Download each sub HTML file if not already present
+subFiles.each { fileName ->
+  def targetFile = new File(downloadDir, fileName)
+  if (targetFile.exists()) {
+    println "${fileName} already exists, skipping download."
+    return
+  }
+  def getCmds = """
+    lcd ${downloadDir.absolutePath}
+    set xfer:clobber on
+    get ${fileName}
+    bye
+  """.stripIndent().trim()
+  println "Downloading ${fileName}..."
+  def getCommand = "${lftp} -u ${user},${password} ${host} -e '${getCmds}'"
+  def proc = ["bash", "-c", getCommand].execute()
+  def out = new ByteArrayOutputStream()
+  def err = new ByteArrayOutputStream()
+  proc.waitForProcessOutput(out, err)
+  if (err.toString().trim()) {
+    println "Error downloading ${fileName}:\n" + err.toString()
+  }
+}
+// Step 4: Create ZIP file
+def zipFile = new File("Output.zip")
+def zipStream = new ZipOutputStream(new FileOutputStream(zipFile))
+downloadDir.eachFile { file ->
+  zipStream.putNextEntry(new ZipEntry(file.name))
+  zipStream.write(file.bytes)
+  zipStream.closeEntry()
+}
+zipStream.close()
+println ":white_check_mark: Output.zip created with ${downloadDir.listFiles().size()} files."
+Modify,
+
+
+
+
+
+
+
+
+
+
+
+Jot something down
+
+
+
+
+
+
+
+
+
