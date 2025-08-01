@@ -1,0 +1,1066 @@
+Hi anshuman, i am having a dbt with rsserver... can i come to your cubicle...?
+
+
+Ansuman Mohanty
+  2:15 PM
+In a call ..will ping you..
+
+
+Lakshmi Meghana Chekka
+  2:15 PM
+I saw u r in a meeting right now..
+2:16
+Ok thank you
+
+
+Ansuman Mohanty
+  3:19 PM
+Hi..
+3:19
+There?
+3:21
+Sorry got caught with some work...
+
+
+Lakshmi Meghana Chekka
+  3:23 PM
+Hi
+3:23
+im in ur cubicle
+
+
+Lakshmi Meghana Chekka
+  10:19 PM
+Hi anshuman
+Screenshot 2025-03-12 at 22.19.31.png
+ 
+Screenshot 2025-03-12 at 22.19.31.png
+
+
+10:20
+I wasn't able to execute rsserver?
+
+
+Ansuman Mohanty
+  10:20 PM
+Did you kill the last instance?
+
+
+Lakshmi Meghana Chekka
+  10:21 PM
+It got stuck in the middle so... i exitted from hod
+
+
+Ansuman Mohanty
+  10:22 PM
+ok
+
+
+Lakshmi Meghana Chekka
+  10:22 PM
+I didnt kill it... How to kill now?
+
+
+Ansuman Mohanty
+  10:22 PM
+looks like that port is not free. Wait for some time.
+
+
+Lakshmi Meghana Chekka
+  10:22 PM
+I am using different credentials from my frds its still the same
+
+
+Ansuman Mohanty
+  10:23 PM
+The port is same.
+10:23
+it is shared across IDs
+10:24
+Or you login to your friend’s VM and exit the process by typing hx.
+
+
+Lakshmi Meghana Chekka
+  10:24 PM
+Oh ok...
+One thing i have dbt.... we need to execute rsserver before taking inputs from the client right....
+so some how I need to open the hod.... I cannot directly do everything from jenkins:thinking_face:
+
+
+Ansuman Mohanty
+  10:24 PM
+if the process is still running.
+10:24
+Right.
+10:25
+You have to start the rsserver first
+10:25
+and then run the jenkins job.
+
+
+Lakshmi Meghana Chekka
+  10:25 PM
+ha...
+10:25
+:+1:
+10:27
+Anshuman
+
+
+Ansuman Mohanty
+  10:28 PM
+yea
+
+
+Lakshmi Meghana Chekka
+  10:29 PM
+I typed hx in all other vm's
+and tried to execute rsserver freshly
+Screenshot 2025-03-12 at 22.28.57.png
+ 
+Screenshot 2025-03-12 at 22.28.57.png
+10:30
+It is taking lot of time... shall I w8 for some time run
+
+
+Ansuman Mohanty
+  10:31 PM
+I think it’s already up
+10:31
+run client
+
+
+Lakshmi Meghana Chekka
+  10:33 PM
+Yeah its working... Sry i didnt see the initialised message in overview:sweat_smile:(beginner's mistake)
+
+
+Ansuman Mohanty
+  10:33 PM
+:joy:
+
+
+Lakshmi Meghana Chekka
+  10:33 PM
+Screenshot 2025-03-12 at 22.33.35.png
+ 
+Screenshot 2025-03-12 at 22.33.35.png
+10:34
+should i press hx to kill it everytime?
+
+
+Ansuman Mohanty
+  10:34 PM
+yes
+
+
+Lakshmi Meghana Chekka
+  10:34 PM
+Ok Ok:+1:
+10:34
+sry for disturbing u at this time
+10:35
+and thank you for the help
+
+
+Ansuman Mohanty
+  10:35 PM
+no problem
+
+
+Lakshmi Meghana Chekka
+  10:35 PM
+:smile:
+
+
+Lakshmi Meghana Chekka
+  11:28 AM
+Hi Ansuman, Sowmiya here
+11:28
+Could we connect for 5 minutes?
+
+
+Ansuman Mohanty
+  11:28 AM
+Hi..
+11:28
+Sure..
+A huddle happened  11:28 AM
+You and Ansuman Mohanty were in the huddle for 8m.
+
+1 reply
+5 months agoView thread
+
+
+Lakshmi Meghana Chekka
+  11:35 AM
+9.56.214.105
+11:35
+1952
+11:35
+myserver myclient
+
+
+Lakshmi Meghana Chekka
+  2:37 PM
+Hi Anshuman
+
+
+Ansuman Mohanty
+  2:37 PM
+Hi....
+
+
+Lakshmi Meghana Chekka
+  2:37 PM
+Did that work>
+2:37
+from mac terminal execution
+
+
+Ansuman Mohanty
+  2:38 PM
+Need some modifications in the rsserver...
+2:38
+As of now I am able to receive the command from mac...
+
+
+Lakshmi Meghana Chekka
+  2:38 PM
+u executed the other day right!
+2:39
+can u tell me how... to execute from mac?
+
+
+Ansuman Mohanty
+  2:39 PM
+rsserver o/p
+2:40
+Ready; T=0.01/0.01 05:04:40
+myserver
+RSSERVER: Initializing
+RSSERVER: Initialized: ipaddress=9.56.214.105 port=1952
+RSSERVER: Connected by 9.124.222.136 on port 61229 and socket 2
+Len  25 nid macbook uid ansuman.mohanty count 2
+RSSERVER: Request for 2 lines on socket 2 by ansuman.mohanty at macbook
+RSSERVER: Disconnected socket 2
+2:40
+On the mac side, I wrote a python script ..
+2:40
+ansumanmohanty@Ansumans-MacBook-Pro CLIENT % cat rsclient.py
+import socket
+
+# Server details
+SERVER_IP = "9.56.214.105"  # Change to the actual server IP
+SERVER_PORT = 1952       # Change to the actual port
+
+# Number to send
+number = "macbook ansuman.mohanty 2"  # Change this to any number
+
+try:
+    # Create a socket
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    # Connect to the server
+    client_socket.connect((SERVER_IP, SERVER_PORT))
+    print(f"Connected to {SERVER_IP}:{SERVER_PORT}")
+
+    # Send the number (encode to bytes)
+    client_socket.sendall(number.encode('ascii'))
+
+    # Receive response
+    # response = client_socket.recv(1024).decode('ascii')
+    response = client_socket.recv(1024)
+    print(f"Server response: {response}")
+
+except Exception as e:
+    print(f"Error: {e}")
+
+finally:
+    # Close the connection
+    client_socket.close()
+ansumanmohanty@Ansumans-MacBook-Pro CLIENT %
+
+
+Lakshmi Meghana Chekka
+  2:40 PM
+Ok...
+So u didnt use the rsclient code?
+
+
+Ansuman Mohanty
+  2:41 PM
+rsclient code will not run on mac
+2:41
+also need to modify the server code to communicate with mac..
+
+
+Lakshmi Meghana Chekka
+  2:42 PM
+Ok
+can you share me that... I will go through it:sweat_smile:
+
+
+Ansuman Mohanty
+  2:42 PM
+  112       /* Accept new connections from clients                          */
+  113       if keyword='READ' & ts=s then do
+  114         nsn = Socket('Accept',s)
+  115         if src=0 then do
+  116           parse var nsn ns . np nia .
+  117           say 'RSSERVER: Connected by' nia 'on port' np 'and socket' ns
+  118
+  119           /* Set ASCII mode */
+  120           call Socket 'SetSockOpt', ns, 'Sol_Socket', 'SO_ASCII', 'On'
+  121           if src¬=0 then say "Error: Could not set SO_ASCII on socket" ns
+  122
+  123         end
+  124       end
+2:43
+Need to set the ASCII mode..
+2:43
+check 119 to 121
+2:44
+make this change on the server side...
+2:45
+then if you want the rsclient to work, you need to change the client side also..
+
+
+Lakshmi Meghana Chekka
+  2:46 PM
+oh ok... I will modify them
+
+
+Ansuman Mohanty
+  3:17 PM
+Hi...
+3:18
+Check this python program that you can run on mac
+3:18
+ansumanmohanty@Ansumans-MacBook-Pro CLIENT % cat rsclient.py
+import socket
+
+# Server details
+SERVER_IP = "9.56.214.105"  # Change to the actual server IP
+SERVER_PORT = 1952       # Change to the actual port
+
+# Number to send
+number = "macbook ansuman.mohanty 10"  # Change this to any number
+
+#
+def receive_lines(sock):
+    dataline = ""  # Buffer for incoming data
+    num = 0        # Line counter
+
+    while True:  # Infinite loop to receive data
+        try:
+            # Read data from the socket
+            # data = sock.recv(1024).decode('ascii', errors='replace')  # Read up to 1024 bytes
+            data = sock.recv(1024).decode('latin-1')  # Read up to 1024 bytes
+            # data = sock.recv(1024) # Read up to 1024 bytes
+            if not data:  # If empty, the connection is closed
+                break
+
+            print(f"{data} \n")
+            # dataline += data  # Append received data to buffer
+
+            # while '\x15' in dataline:  # Process complete lines (delimiter = '15'x in REXX)
+            #   nextline, dataline = dataline.split('\x15', 1)  # Extract first complete line
+            #   num += 1
+            #   print(f"{num:5}: {nextline}")  # Print line number and data
+
+        except Exception as e:
+            print(f"Error: {e}")
+            break
+
+try:
+    # Create a socket
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    # Connect to the server
+    client_socket.connect((SERVER_IP, SERVER_PORT))
+    print(f"Connected to {SERVER_IP}:{SERVER_PORT}")
+
+    # Send the number (encode to bytes)
+    client_socket.sendall(number.encode('ascii'))
+
+    # Receive response
+    # response = client_socket.recv(1024).decode('ascii')
+    # response = client_socket.recv(1024)
+    # print(f"Server response: {response}")
+    receive_lines(client_socket)
+
+except Exception as e:
+    print(f"Error: {e}")
+
+finally:
+    # Close the connection
+    client_socket.close()
+ansumanmohanty@Ansumans-MacBook-Pro CLIENT %
+3:18
+Still needs some formatting/beautification changes..but the basic objective is achieved..
+3:18
+Run the rsserver with the modifications for SO_ASCII
+3:19
+and then run this python code on mac..
+3:19
+you should get some output..
+
+
+Lakshmi Meghana Chekka
+  3:23 PM
+Ok anshuman... I will execute now
+
+
+Lakshmi Meghana Chekka
+  8:50 PM
+Screenshot 2025-03-16 at 20.50.42.png
+ 
+Screenshot 2025-03-16 at 20.50.42.png
+8:52
+Hi ansuman...
+It is not giving me the output?
+can u look into it...
+I wasnt feeling well so couldnt ask you on the same day itself
+8:53
+i changed the code as u directed
+Screenshot 2025-03-16 at 20.53.23.png
+ 
+Screenshot 2025-03-16 at 20.53.23.png
+
+
+Lakshmi Meghana Chekka
+  10:07 PM
+number = "macbook ansuman.mohanty 10"
+here ansuman.mohanty is the username of ur gdlvm7 right?
+
+
+Ansuman Mohanty
+  10:48 PM
+How are you executing the client on Mac?
+10:49
+To execute: python rssclient.py
+
+
+Lakshmi Meghana Chekka
+  10:57 PM
+Yeah its working:star-struck:
+:+1:
+1
+
+
+
+Ansuman Mohanty
+  10:58 PM
+What output are you getting
+11:00
+You can continue exploring that program../
+
+
+Lakshmi Meghana Chekka
+  11:01 PM
+it is retrieving 10lines of code
+Screenshot 2025-03-16 at 23.01.16.png
+ 
+Screenshot 2025-03-16 at 23.01.16.png
+11:03
+yes,, i will do that... the only job left is executing the hatt files... i will modify the client and server codes accordingly... thank you so much ansuman
+
+
+
+Ansuman Mohanty
+You can continue exploring that program../
+Direct Message | Mar 16th | View conversation
+:+1:
+1
+
+
+
+Lakshmi Meghana Chekka
+  12:15 PM
+hi ansuman Im having a trouble with python script can i come to ur cubicle if ur free
+or can you mention at what time you will be free
+
+
+Ansuman Mohanty
+  12:15 PM
+sure..
+12:15
+you can come now..
+
+
+Lakshmi Meghana Chekka
+  3:21 PM
+Hi ansuman
+code is working
+Im able to execute hatt files from jenkins and retrieve html file content to jenkins:star-struck::partying_face:
+
+
+Ansuman Mohanty
+  3:29 PM
+Awesome
+3:29
+What was the problem?
+
+
+Lakshmi Meghana Chekka
+  3:34 PM
+server issue i guess
+i did ipl cms
+it worked
+
+
+Lakshmi Meghana Chekka
+  8:28 PM
+Hi ansuman
+8:28
+1000050163.jpg
+ 
+1000050163.jpg
+8:30
+So, in this we have a yaml file given, using that we need to inputs and use it compilation right, can you tell me how to compile and how to build TCP ip module... The last two things I can do with the code I have
+
+
+Lakshmi Meghana Chekka
+  12:04 AM
+If you tell me how to do these things manually, It takes hardly 2-3 hours to modify the code
+Can you explain me them in your free time ansuman ?
+
+
+Ansuman Mohanty
+  12:31 PM
+https://github.com/mstiri/p3270
+
+
+Ansuman Mohanty
+  12:36 PM
+https://github.com/py3270/py3270/blob/master/tests/test_emulator.py
+
+
+Ansuman Mohanty
+  12:44 PM
+Model Name
+image.png
+ 
+image.png
+
+
+Ansuman Mohanty
+  12:56 PM
+https://github.com/py3270/py3270/blob/master/py3270/__init__.py
+12:57
+https://w3.ibm.com/w3publisher/wca-ibm
+
+
+Ansuman Mohanty
+  11:42 AM
+Hi..
+11:42
+There?
+
+
+Lakshmi Meghana Chekka
+  11:48 AM
+Hi
+11:49
+Yes ansuman
+
+
+Ansuman Mohanty
+  11:49 AM
+Regarding hackathon project
+11:49
+lets sync up after 2
+11:49
+will have a call
+
+
+Lakshmi Meghana Chekka
+  11:50 AM
+Ok... I made some code regarding that... I will show you
+
+
+Ansuman Mohanty
+  12:03 PM
+ok..
+
+
+Lakshmi Meghana Chekka
+  12:26 PM
+Hi ansuman, I made some modifications in the emulator script on the same day you explained me about the edl compilation... But I didn't checked it with my userid on gdlvm7 cause I was busy with other works.
+Now I checked but it says my userid don't have access to TCPC0 library... Can you tell me how can I get that access
+12:27
+This is when I executed using edl compile command
+IMG20250708120747.jpg
+ 
+IMG20250708120747.jpg
+12:28
+This is when I executed edl dev user interface
+IMG-20250708-WA0007.jpeg
+ 
+IMG-20250708-WA0007.jpeg
+12:28
+I updated this user interfaces... And when I executed them... It shows no authority to TCPC0
+2 files
+ 
+IMG-20250708-WA0004.jpeg
+IMG-20250708-WA0002.jpeg
+
+
+Ansuman Mohanty
+  12:28 PM
+ok...Maybe I can execute the script and check..
+12:29
+you may pass me all the related files..
+12:29
+Or better
+12:29
+if you can create a github project with these files..
+12:29
+and pass me on the repo link..
+12:29
+I can clone it..
+
+
+Lakshmi Meghana Chekka
+  12:30 PM
+Can you tell me how can I get the access to TCPC0... I want to check with my userid
+
+
+Ansuman Mohanty
+  12:30 PM
+again it requires permissions that i think its difficult to get..
+12:30
+you may ask Sowmiya..
+
+
+Lakshmi Meghana Chekka
+  12:31 PM
+Ok then
+12:31
+I will make a git repo
+12:31
+And share you
+
+
+Ansuman Mohanty
+  12:31 PM
+:+1:
+12:31
+In the meanwhile, you may ask for the permissions to Sowmiya...
+
+
+Lakshmi Meghana Chekka
+  12:42 PM
+Ok ansuman
+
+
+Lakshmi Meghana Chekka
+  2:38 PM
+hi ansuman can i call you now
+A huddle happened  2:39 PM
+You were in the huddle by yourself for 2m. A nice, meditative session :tea:
+
+
+Lakshmi Meghana Chekka
+  3:06 PM
+https://github.com/Chlmeghana/IBM/blob/main/hackathon.py
+
+
+Ansuman Mohanty
+  4:52 PM
+:+1::skin-tone-4:
+
+
+Lakshmi Meghana Chekka
+  5:04 PM
+hi ansuman
+i received this mail from the person whom i contacted for requesting access to tcpc0 library :
+I will be out of the office starting Tuesday, July 1st around 4pm and will be back in the office on Monday, January 14th. I will be out of the country for a majority of this time off. I will have my laptop during this time, however I am not planning on checking email or Slack. For urgent matters, please contact my manager Stephanie Rivero
+5:05
+what should i do now:upside_down_face:
+
+
+Ansuman Mohanty
+  5:07 PM
+ok
+5:07
+lets sync up tomorrow
+
+
+Lakshmi Meghana Chekka
+  5:07 PM
+Ok:+1:
+5:09
+Im getting this output after executing the emulator script
+------>>>>                                   Compile a part
+------>>>>                       Tokens
+------>>>>              Version:  TCPC0___      Field in error!
+changed to              Version:  TCPC0___      Field in error!
+went to next line
+------>>>>            Part Name:  TCPIP __
+------>>>>            Part Type:  MODULE__
+------>>>>                       Options
+------>>>>          Search Path:  BOTH____
+------>>>>    Bill of Materials:  NOBOM
+------>>>>        Store objects:  NOSTORE
+------>>>>      Listing Logging:  LOG___
+------>>>>     BATCH or NOBATCH:  NOBATCH
+------>>>> Check if real source:  CHKSRC__
+------>>>>      Object Filetype:  HASHED__
+------>>>>   Object Destination:  A____
+------>>>>  Listing Destination:  PRINT
+------>>>>            Work Mode:  A
+------>>>>             COMPOPTS:  _______________________________________________________
+------>>>>           Setup Exec:  ________
+------>>>>         Cleanup Exec:  ________
+------>>>> TAUTH    013E: MEGHANA at GDLVM7 does not have READ authority to the TCPC0
+5:09
+could you check with ur gdlvm7 credentials, and tell me ur output if u r free right now
+
+
+Ansuman Mohanty
+  5:19 PM
+actually am out now.
+5:19
+will check.
+
+
+Lakshmi Meghana Chekka
+  5:19 PM
+Ok sure ansuman.
+
+
+Ansuman Mohanty
+  10:50 AM
+Hi..
+10:50
+There?
+
+
+Lakshmi Meghana Chekka
+  11:11 AM
+Hi ansuman , I'm in bcit for the interns presentation
+11:12
+Is it about the hackathon?
+
+
+Ansuman Mohanty
+  12:06 PM
+yes...
+12:06
+Thats fine
+12:06
+When is it going to get over?
+
+
+Lakshmi Meghana Chekka
+  12:07 PM
+I guess 1pm
+
+
+Ansuman Mohanty
+  12:07 PM
+ok..
+
+
+Lakshmi Meghana Chekka
+  12:08 PM
+After the meeting we are planning to go to pg... If you want I can come to egl after the meeting
+
+
+Ansuman Mohanty
+  12:09 PM
+you can go to PG..
+
+1 reply
+16 days agoView thread
+
+
+Ansuman Mohanty
+  12:09 PM
+And come online..
+
+
+Lakshmi Meghana Chekka
+  12:09 PM
+Actually I don't have my laptop rn
+
+
+Ansuman Mohanty
+  12:09 PM
+ok..
+
+
+Lakshmi Meghana Chekka
+  12:09 PM
+replied to a thread:
+you can go to PG..
+Ok ansuman
+
+
+Lakshmi Meghana Chekka
+  12:53 PM
+Anshuman is it ok if we connect in the evening at 5 or 6pm, as the meeting is taking more time than expected... and we are planning to have lunch here.
+
+
+Ansuman Mohanty
+  12:53 PM
+sure..dont worry about this..
+
+
+Lakshmi Meghana Chekka
+  12:54 PM
+Ok ansuman thankyou :+1: (edited) 
+
+
+Ansuman Mohanty
+  2:25 PM
+------>>>> ====>                                                                           
+------>>>>                                   Compile a part                                
+------>>>>                       Tokens                                                    
+------>>>>              Version:   CPB0UG_      Field in error!                            
+changed to              Version:   CPB0UG_      Field in error!                            
+went to next line
+------>>>>            Part Name:  TCPC0___                                                 
+------>>>>            Part Type:  TCPIP __                                                 
+------>>>>                       Options                                                   
+------>>>>          Search Path:  BOTH____                                                 
+------>>>>    Bill of Materials:  NOBOM                                                    
+------>>>>        Store objects:  NOSTORE                                                  
+------>>>>      Listing Logging:  LOG___                                                   
+------>>>>     BATCH or NOBATCH:  NOBATCH                                                  
+------>>>> Check if real source:  CHKSRC__                                                 
+------>>>>      Object Filetype:  HASHED__                                                 
+------>>>>   Object Destination:  A____                                                    
+------>>>>  Listing Destination:  PRINT                                                    
+------>>>>            Work Mode:  A                                                        
+------>>>>             COMPOPTS:  _______________________________________________________  
+------>>>>           Setup Exec:  ________                                                 
+------>>>>         Cleanup Exec:  ________                                                 
+------>>>> Invalid version specified, use a '?' for a list.                                
+------>>>> ====>                                                                           
+
+
+Lakshmi Meghana Chekka
+  1:08 PM
+Hi ansuman, I had no time yesterday, sry i didn't ping you in the evening.... Can we connect after lunch?
+
+
+Ansuman Mohanty
+  1:24 PM
+No problem...
+
+
+Ansuman Mohanty
+  1:39 PM
+Can you write one login_here function.. which does a login userid here on the command
+1:39
+ Fill in your USERID and PASSWORD and press ENTER
+ (Your password will not appear when you type it)
+ USERID   ===>
+ PASSWORD ===>
+
+ COMMAND  ===> logon ansuman here
+                                                            RUNNING   GDLVM7
+4A                                                 S                    042/034
+1:40
+Send an enter and then the password..
+
+
+Ansuman Mohanty
+  2:15 PM
+https://github.ibm.com/Ansuman-Mohanty/zvm-hackathon
+
+
+Lakshmi Meghana Chekka
+  2:45 PM
+Ansuman, I committed the changes in the git.
+
+
+Ansuman Mohanty
+  2:49 PM
+Awesome..
+
+
+Lakshmi Meghana Chekka
+  2:51 PM
+# Ends the current user session if already logged in
+    def logon_here(self):   # Releases the logged-in user session when the user is already authenticated
+        debug_print("logon here function called", self.args)
+        if self.find_logon_screen() != ALL_FINE:
+            return NO_LOGON_SCREEN
+        debug_print(f"Username:  {self.__username}", self.args)
+        self.em.send_enter()
+        self.em.send_string(f"logon {self.__username} here")
+        self.em.send_enter()
+        time.sleep(1)
+        self.em.send_string(self.__password)
+        self.em.send_enter()
+        time.sleep(1)
+        if self.findString(HCP_ALREADY_LOGGED_ON):
+            return ALREADY_LOGGED_ON
+        if self.findString("incorrect userid and/or password"):
+            return WRONG_ID_OR_PW
+        if self.findString("LOGON unsuccessful"):
+            return LOGON_FAILED
+        print_to_terminal("LOGON successful.", self.args["quiet"])
+        logging.info("LOGON successful.")
+        self.reset()
+        return ALL_FINE
+
+
+Ansuman Mohanty
+  2:51 PM
+ok..
+2:52
+Do you know how to make good videos..
+
+
+Lakshmi Meghana Chekka
+  2:54 PM
+Yeah, I will try... I like doing editing stuff
+2:54
+what vdo
+
+
+Ansuman Mohanty
+  2:55 PM
+Basically..we have to make a demo video for our hackathon project..
+2:55
+will tell you the details in a hour..
+
+
+Lakshmi Meghana Chekka
+  2:55 PM
+I need to do the voice over?
+
+
+Ansuman Mohanty
+  2:55 PM
+No..not required..
+
+
+Lakshmi Meghana Chekka
+  2:56 PM
+Then? Just recording the demo execution?
+2:56
+with transitions in between?
+
+
+Ansuman Mohanty
+  3:11 PM
+yes..
+3:11
+will tell you ...
+
+
+Ansuman Mohanty
+  3:33 PM
+Where did you commit?
+
+
+Lakshmi Meghana Chekka
+  4:45 PM
+Lakshmi-Meghana-Chekka
+
+
+Ansuman Mohanty
+  8:36 PM
+Hi..
+8:36
+There?
+8:37
+Can you join huddle?
+A huddle happened  8:38 PM
+You and Ansuman Mohanty were in the huddle for 0m.
+
+
+Ansuman Mohanty
+  12:21 PM
+https://w3.ibm.com/w3publisher/ai-for-business/watsonx-challenge-2025-page-versions/challenge-p1-opening#get-involved
+
+
+Ansuman Mohanty
+  4:34 PM
+https://w3.ibm.com/w3publisher/z-vm-and-kvm-hackathon/peoples-choice-voting
+
+
+
+
+
+
+munavir
+import java.nio.file.*
+import java.util.zip.ZipOutputStream
+import java.util.zip.ZipEntry
+def host = "gdlfcft.endicott.ibm.com"
+def user = "meghana"
+def password = System.getenv("FTP_PASSWORD") ?: "B@NGAL0R"
+def lftp = "/opt/homebrew/bin/lftp"
+def downloadDir = new File("download1")
+// Prompt for file name
+print "Enter the name of the HTML file to download (e.g., FETESTS.HTML): "
+def bucketFile = System.console().readLine()?.trim()
+if (!bucketFile || !bucketFile.toUpperCase().endsWith(".HTML")) {
+    println ":x: Invalid file name."
+    System.exit(1)
+}
+// Prepare download directory
+if (downloadDir.exists()) {
+    downloadDir.eachFile { it.delete() }
+} else {
+    downloadDir.mkdirs()
+}
+// Step 1: Download main HTML file
+def bucketCmds = """
+    set xfer:clobber yes;
+    lcd ${downloadDir.absolutePath}
+    get ${bucketFile}
+    bye
+""".stripIndent().trim()
+println "\nDownloading ${bucketFile}..."
+def bucketDownloadCmd = "${lftp} -u ${user},${password} ${host} -e '${bucketCmds}'"
+def bucketProcess = ["bash", "-c", bucketDownloadCmd].execute()
+def bucketOut = new ByteArrayOutputStream()
+def bucketErr = new ByteArrayOutputStream()
+bucketProcess.waitForProcessOutput(bucketOut, bucketErr)
+if (bucketErr.toString().trim()) {
+    println ":warning: Error downloading ${bucketFile}:\n" + bucketErr.toString()
+    System.exit(1)
+}
+// Step 2: Extract sub HTML file names
+def bucketContent = new File(downloadDir, bucketFile).getText("UTF-8")
+def matcher = (bucketContent =~ /<a href=(\S+?\.HTML)>/)
+def subFiles = matcher.collect { it[1].replaceAll(/[">]/, "") }.unique()
+println "\nSub HTML files to download:"
+subFiles.each { println "- ${it}" }
+// Step 3: Download sub HTML files
+subFiles.each { fileName ->
+    def getCmds = """
+        set xfer:clobber yes;
+        lcd ${downloadDir.absolutePath}
+        get ${fileName}
+        bye
+    """.stripIndent().trim()
+    println "\nDownloading ${fileName}..."
+    def getCommand = "${lftp} -u ${user},${password} ${host} -e '${getCmds}'"
+    def proc = ["bash", "-c", getCommand].execute()
+    def out = new ByteArrayOutputStream()
+    def err = new ByteArrayOutputStream()
+    proc.waitForProcessOutput(out, err)
+    if (err.toString().trim()) {
+        println ":warning: Error downloading ${fileName}:\n" + err.toString()
+    }
+}
+// Step 4: Create ZIP file
+def zipFile = new File("OUTPUT.zip")
+if (zipFile.exists()) zipFile.delete()
+def zipStream = new ZipOutputStream(new FileOutputStream(zipFile))
+downloadDir.eachFile { file ->
+    zipStream.putNextEntry(new ZipEntry(file.name))
+    zipStream.write(file.bytes)
+    zipStream.closeEntry()
+}
+zipStream.close()
+println "\n:white_check_mark: ZIP file 'OUTPUT.zip' created with ${subFiles.size() + 1} files."
