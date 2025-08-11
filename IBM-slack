@@ -2,21 +2,6 @@ Raghavendra Nayak
   12:26 PM
 https://www.ibm.com/docs/en/zvm/7.4.0?topic=vehicle-iucv-overview
 
-
-Lakshmi Meghana Chekka
-  12:27 PM
-:smiley::+1: ಧನ್ಯವಾದಗಳು raghu
-
-
-Raghavendra Nayak
-  12:27 PM
-yappa
-
-
-Lakshmi Meghana Chekka
-  11:25 AM
-Hi
-11:25
 try {
         def bytes = Files.readAllBytes(localFile.toPath())
         def encodings = ["Cp500", "IBM1047", "Cp037"]
